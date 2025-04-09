@@ -5,6 +5,8 @@
 package com.tbastos.leco;
 
 import com.tbastos.leco.mainui.LecoUI;
+import java.text.DateFormatSymbols;
+import java.util.Locale;
 
 /**
  *
@@ -13,8 +15,9 @@ import com.tbastos.leco.mainui.LecoUI;
 public class LecoInit {
     
     public static void main(String[] args) {
-        
-        LecoUI ui = new LecoUI();
+           
+        Locale.setDefault(new Locale("pt", "BR"));
+        LecoUI ui = new LecoUI(); 
         ui.initUI();
     }    
 }

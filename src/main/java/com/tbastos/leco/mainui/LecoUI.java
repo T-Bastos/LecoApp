@@ -32,10 +32,6 @@ public class LecoUI {
             Logger.getLogger(LecoUI.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        UIManager.put("OptionPane.noButtonText", "Não");
-        UIManager.put("OptionPane.yesButtonText", "Sim");
-        UIManager.put("OptionPane.cancelButtonText", "Cancelar");
-        
         JMainFrame jMainFrame = new JMainFrame();
         
         JPanelSelection jPanelSelection = new JPanelSelection();

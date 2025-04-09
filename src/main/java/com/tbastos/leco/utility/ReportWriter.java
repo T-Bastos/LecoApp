@@ -13,6 +13,7 @@ import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -214,7 +215,12 @@ public class ReportWriter {
     public void reportWriterPrint(JTextPane textPane) throws PrinterException {
         
         textPane.setEnabled(true);
-        textPane.print();
+        PrinterJob job = PrinterJob.getPrinterJob();
+        job.setPrintable(textPane.getPrintable(null, null));
+
+        if (job.printDialog()) {
+            job.print();
+        }
         textPane.setEditable(false);
     }
 }

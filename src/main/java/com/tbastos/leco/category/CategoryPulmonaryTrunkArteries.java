@@ -34,7 +34,7 @@ public final class CategoryPulmonaryTrunkArteries extends CategoryComponent {
     
     public CategoryPulmonaryTrunkArteries() {
         
-        jLabelCategory = new JLabelCategory("Tronco e artérias pulmonares");
+        jLabelCategory = new JLabelCategory("<html>Tronco e artérias <br>pulmonares</br></html>");
         jLabelSubcategories = new ArrayList<>();
         jComboBoxSubcategories = new ArrayList<>();
         arrayEditButton = new ArrayList<>();

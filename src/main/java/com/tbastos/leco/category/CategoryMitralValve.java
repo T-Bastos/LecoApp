@@ -285,10 +285,10 @@ public final class CategoryMitralValve extends CategoryComponent {
                 
                 if(selectedIndex == 9) {
                     
-                    jLabelCategory.setText("Prótese biológica em posição mitral");
+                    jLabelCategory.setText("<html>Prótese biológica <br>em posição mitral</br></html>");
                 } else if(selectedIndex == 10) {
                     
-                    jLabelCategory.setText("Prótese mecânica em posição mitral");
+                    jLabelCategory.setText("<html>Prótese mecânica <br>em posição mitral</br></html>");
                 } else {
                     
                     jLabelCategory.setText("Valva mitral");
@@ -648,10 +648,45 @@ public final class CategoryMitralValve extends CategoryComponent {
         if (selectedValue instanceof Integer && (Integer) selectedValue == JOptionPane.OK_OPTION) {
 
             wilkins = field1.getText();
+            try {
+                
+                wilkins = (Integer.parseInt(wilkins) == 1 ? "1 ponto" : wilkins + " pontos");
+            } catch (NumberFormatException e) {
+                
+                wilkins += " pontos";    
+            }
             thickeningWilkins = field2.getText();
+            try {
+                
+                thickeningWilkins = (Integer.parseInt(thickeningWilkins) == 1 ? "1 ponto" : thickeningWilkins + " pontos");
+            } catch (NumberFormatException e) {
+                
+                thickeningWilkins += " pontos";    
+            }
             mobilityWilkins = field3.getText();
+            try {
+                
+                mobilityWilkins = (Integer.parseInt(mobilityWilkins) == 1 ? "1 ponto" : mobilityWilkins + " pontos");
+            } catch (NumberFormatException e) {
+                
+                mobilityWilkins += " pontos";    
+            }
             calcificationWilkins = field4.getText();
+            try {
+                
+                calcificationWilkins = (Integer.parseInt(calcificationWilkins) == 1 ? "1 ponto" : calcificationWilkins + " pontos");
+            } catch (NumberFormatException e) {
+                
+                calcificationWilkins += " pontos";    
+            }
             subvalveWilkins = field5.getText();  
+            try {
+                
+                subvalveWilkins = (Integer.parseInt(subvalveWilkins) == 1 ? "1 ponto" : subvalveWilkins + " pontos");
+            } catch (NumberFormatException e) {
+                
+                subvalveWilkins += " pontos";    
+            }
         }   
         
         setHashCategoryReport();
@@ -704,7 +739,7 @@ public final class CategoryMitralValve extends CategoryComponent {
         hashCategoryReport.put("<html>Equação de continuidade - <b>DEFINIR</b></html>", "Área valvar: " + valveArea + " cm² (equação de continuidade). ");
         hashCategoryReport.put("<html>Planimetria - <b>DEFINIR</b></html>", "Área valvar: " + valveArea + " cm² (planimetria). ");
         hashCategoryReport.put("<html>Orifício - <b>DEFINIR</b></html>", "Orifício efetivo regurgitante estimado em " + orifice + " cm². ");
-        hashCategoryReport.put("<html>Escore de Wilkins - <b>DEFINIR</b></html>", "Escore de Wilkins: " + wilkins + " pontos (espessura - " + thickeningWilkins + " pontos; mobilidade - " + mobilityWilkins + " pontos; calcificação - " + calcificationWilkins + " pontos; subvalvar - " + subvalveWilkins + " pontos). ");
+        hashCategoryReport.put("<html>Escore de Wilkins - <b>DEFINIR</b></html>", "Escore de Wilkins: " + wilkins + " (espessura - " + thickeningWilkins + "; mobilidade - " + mobilityWilkins + "; calcificação - " + calcificationWilkins + "; subvalvar - " + subvalveWilkins +"). ");
     }
 
     @Override

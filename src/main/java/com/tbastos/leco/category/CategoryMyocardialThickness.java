@@ -55,11 +55,11 @@ public final class CategoryMyocardialThickness extends CategoryComponent {
         arrayEditButton.add(editButtonMassEsp);
         
         jLabelSubcategories.add(new JLabelSubcategory("Hipertrofia")); 
-        comboBoxHypertrophy = new JComboBoxSubcategory(new String[]{"", "Concêntrica", "Excêntrica", "Remodelamento concêntrico", "Septo interventricular - Aspecto AS"});
+        comboBoxHypertrophy = new JComboBoxSubcategory(new String[]{"", "Concêntrica", "Excêntrica", "Remodelamento concêntrico"});
         jComboBoxSubcategories.add(comboBoxHypertrophy);
         
-        jLabelSubcategories.add(new JLabelSubcategory("Septo interventricular")); 
-        comboBoxInterventricularSeptum = new JComboBoxSubcategory(new String[]{"", "Aspecto sigmoide"});
+        jLabelSubcategories.add(new JLabelSubcategory("Septo sigmoide")); 
+        comboBoxInterventricularSeptum = new JComboBoxSubcategory(new String[]{"", "Sim"});
         jComboBoxSubcategories.add(comboBoxInterventricularSeptum);
         
         jLabelSubcategories.add(new JLabelSubcategory("Doenças miocárdicas")); 
@@ -212,7 +212,7 @@ public final class CategoryMyocardialThickness extends CategoryComponent {
             input[1] = field1;
         } else if(comboBoxDisease.getSelectedIndex() == 1) {
         
-            input[0] = "Aumento da espessura miocárdica com relação septo/parede:";
+            input[0] = "Relação septo/parede posterior:";
             input[1] = field1;
         }
 
@@ -253,12 +253,11 @@ public final class CategoryMyocardialThickness extends CategoryComponent {
         hashCategoryReport.put("Discreto", "Com aumento discreto. ");
         hashCategoryReport.put("Moderado", "Com aumento moderado. ");
         hashCategoryReport.put("Importante", "Com aumento importante. ");
-        hashCategoryReport.put("Aspecto sigmoide", "Septo interventricular com aspecto sigmoide. ");
-        hashCategoryReport.put("<html>Massa e espessura - <b>DEFINIR</b></html>", "Espessura relativa: " + relativeThickness + " (VR < 0,42). Índice de massa: " + mass + " g/m² (VR < 115 g/m² para homens e < 95 g/m² para mulheres). ");
+        hashCategoryReport.put("Sim", "Septo interventricular com aspecto sigmoide. ");
+        hashCategoryReport.put("<html>Massa e espessura - <b>DEFINIR</b></html>", "Espessura relativa: " + relativeThickness + " (VR < 0,42). Índice de massa: " + mass + " g/m² (VR \u2264 115 g/m² para homens e \u2264 95 g/m² para mulheres). ");
         hashCategoryReport.put("Concêntrica", "Hipertrofia concêntrica do ventrículo esquerdo. ");
         hashCategoryReport.put("Excêntrica", "Hipertrofia excêntrica do ventrículo esquerdo. ");
         hashCategoryReport.put("Remodelamento concêntrico", "Remodelamento concêntrico do ventrículo esquerdo. ");
-        hashCategoryReport.put("Septo interventricular - Aspecto AS", "Septo interventricular com aspecto sigmoide. ");
         hashCategoryReport.put("<html>Cardiomiopatia hipertrófica - <b>DEFINIR</b></html>", "Aumento da espessura miocárdica com relação septo/parede posterior estimada em " + myocardialThickness + " (VR < 1,3 ou < 1,5 em pacientes hipertensos). Achado sugestivo de Cardiomiopatia Hipertrófica septal assimétrica. ");
         hashCategoryReport.put("Cardiomiopatia com trabeculação excessiva", "Aumento da espessura miocárdica associada a trabeculação excessiva do ventrículo esquerdo, principalmente em seus segmentos médio-apicais. Critérios de Jenni / Stollberger positivos para Cardiomiopatia com trabeculação excessiva (Cardiomiopatia não compactada). Observação: outras condições clínicas podem estar associadas a aumento da trabeculação do ventrículo esquerdo (ex: sobrecarga de volume); correlacionar caso com história clínica e outros métodos de imagem. ");
         hashCategoryReport.put("<html>Amiloidose - <b>DEFINIR</b></html>", "Aumento da espessura miocárdica do ventrículo esquerdo e do ventrículo direito (" + myocardialThickness + " mm), com aumento de sua ecogenicidade e “granular sparkling”. Achados podem corresponder a doença de depósito miocárdio (amiloidose cardíaca?). ");

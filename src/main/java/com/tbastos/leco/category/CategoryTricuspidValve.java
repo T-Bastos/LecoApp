@@ -262,10 +262,10 @@ public final class CategoryTricuspidValve extends CategoryComponent {
                 
                 if(selectedIndex == 5) {
                     
-                    jLabelCategory.setText("Prótese biológica em posição tricúspide");
+                    jLabelCategory.setText("<html>Prótese biológica <br>em posição tricúspide</br></html>");
                 } else if(selectedIndex == 6) {
                     
-                    jLabelCategory.setText("Prótese mecânica em posição tricúspide");
+                    jLabelCategory.setText("<html>Prótese mecânica <br>em posição tricúspide</br></html>");
                 } else {
                     
                     jLabelCategory.setText("Valva tricúspide");

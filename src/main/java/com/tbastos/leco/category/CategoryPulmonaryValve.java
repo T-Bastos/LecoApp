@@ -115,10 +115,10 @@ public final class CategoryPulmonaryValve extends CategoryComponent {
                 
                 if(selectedIndex == 3) {
                     
-                    jLabelCategory.setText("Prótese biológica em posição pulmonar");
+                    jLabelCategory.setText("<html>Prótese biológica <br>em posição pulmonar</br></html>");
                 } else if(selectedIndex == 4) {
                     
-                    jLabelCategory.setText("Prótese mecânica em posição pulmonar");
+                    jLabelCategory.setText("<html>Prótese mecânica <br>em posição pulmonar</br></html>");
                 } else {
                     
                     jLabelCategory.setText("Valva pulmonar");

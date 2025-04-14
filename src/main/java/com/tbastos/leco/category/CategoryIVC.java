@@ -37,7 +37,7 @@ public final class CategoryIVC extends CategoryComponent {
         arrayEditButton = new ArrayList<>();
         
         jLabelSubcategories.add(new JLabelSubcategory("Modelo")); 
-        comboBoxModel = new JComboBoxSubcategory(new String[]{"", "Normalizada", "Variação reduzida", "<html>Dilatada - <b>DEFINIR</b></html>", "<html>Dilatada sem variação - <b>DEFINIR</b></html>"});
+        comboBoxModel = new JComboBoxSubcategory(new String[]{"", "Normal", "Diâmetro normal + variação reduzida", "<html>Dilatada e variação normal - <b>DEFINIR</b></html>", "<html>Dilatada e sem variação - <b>DEFINIR</b></html>"});
         comboBoxModel.setName("Model");
         jComboBoxSubcategories.add(comboBoxModel);
         editButtonModel = new JEditButton();
@@ -134,10 +134,10 @@ public final class CategoryIVC extends CategoryComponent {
         
         hashCategoryReport = new HashMap<>();
         hashCategoryReport.put("", "");
-        hashCategoryReport.put("Normalizada", "Com diâmetro, variação respiratória e fluxo normais. ");
-        hashCategoryReport.put("Variação reduzida", "Com diâmetro normal e variação respiratória reduzida. ");
-        hashCategoryReport.put("<html>Dilatada - <b>DEFINIR</b></html>", "Dilatada (" + dilat + " mm), com variação respiratória normal. ");
-        hashCategoryReport.put("<html>Dilatada sem variação - <b>DEFINIR</b></html>", "Dilatada (" + dilat + " mm), com variação respiratória reduzida. ");
+        hashCategoryReport.put("Normal", "Com diâmetro, variação respiratória e fluxo normais. ");
+        hashCategoryReport.put("Diâmetro normal + variação reduzida", "Com diâmetro normal e variação respiratória reduzida. ");
+        hashCategoryReport.put("<html>Dilatada e variação normal - <b>DEFINIR</b></html>", "Dilatada (" + dilat + " mm), com variação respiratória normal. ");
+        hashCategoryReport.put("<html>Dilatada e sem variação - <b>DEFINIR</b></html>", "Dilatada (" + dilat + " mm), com variação respiratória reduzida. ");
         hashCategoryReport.put("Presença de válvula de Eustáquio", "Presença de válvula de Eustáquio na desembocadura da veia cava inferior. ");
         hashCategoryReport.put("Presença de Rede de Chiari", "Presença de Rede de Chiari na desembocadura da veia cava inferior. ");
     }  

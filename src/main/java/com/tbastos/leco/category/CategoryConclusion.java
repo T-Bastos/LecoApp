@@ -72,7 +72,7 @@ public final class CategoryConclusion extends CategoryComponent {
         jComboBoxSubcategories.add(comboBoxMyocardialThickness);
         
         jLabelSubcategories.add(new JLabelSubcategory("Ventrículo esquerdo")); 
-        comboBoxLeftVentricle = new JComboBoxSubcategory(new String[]{"", "Comprometimento miocárdico difuso do ventrículo esquerdo", "Comprometimento segmentar do ventrículo esquerdo"});
+        comboBoxLeftVentricle = new JComboBoxSubcategory(new String[]{"", "Comprometimento miocárdico difuso do ventrículo esquerdo", "Comprometimento miocárdico segmentar do ventrículo esquerdo"});
         jComboBoxSubcategories.add(comboBoxLeftVentricle);
         
         jLabelSubcategories.add(new JLabelSubcategory("Diástole")); 
@@ -506,7 +506,7 @@ public final class CategoryConclusion extends CategoryComponent {
         hashCategoryReport.put("Cardiomiopatia com trabeculação excessiva", "Cardiomiopatia com trabeculação excessiva. ");
         hashCategoryReport.put("Cardiomiopatia arritmogênica do ventrículo direito", "Cardiomiopatia arritmogênica do ventrículo direito. ");
         hashCategoryReport.put("Comprometimento miocárdico difuso do ventrículo esquerdo", "Comprometimento miocárdico difuso do ventrículo esquerdo. ");
-        hashCategoryReport.put("Comprometimento segmentar do ventrículo esquerdo", "Comprometimento segmentar do ventrículo esquerdo. ");
+        hashCategoryReport.put("Comprometimento miocárdico segmentar do ventrículo esquerdo", "Comprometimento segmentar do ventrículo esquerdo. ");
         hashCategoryReport.put("Alteração do relaxamento ventricular esquerdo", "Alteração do relaxamento ventricular esquerdo. ");
         hashCategoryReport.put("Disfunção diastólica do ventrículo esquerdo de grau I", "Disfunção diastólica do ventrículo esquerdo de grau I. ");
         hashCategoryReport.put("Disfunção diastólica do ventrículo esquerdo de grau II", "Disfunção diastólica do ventrículo esquerdo de grau II. ");

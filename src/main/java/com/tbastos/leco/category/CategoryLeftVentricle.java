@@ -66,7 +66,7 @@ public final class CategoryLeftVentricle extends CategoryComponent {
         arrayEditButton.add(editButtonDysAneu);
         
         jLabelSubcategories.add(new JLabelSubcategory("Função distólica")); 
-        comboBoxDys = new JComboBoxSubcategory(new String[]{"", "VE normal, ao DT", "Sem sinais de aumento - VE", "Padrão de alteração do relaxamento", "DD - VE grau I", "DD - VE grau II", "DD - VE grau III(restritivo)", "Sinais de aumento - VE", "VE não avaliada por arritmia", "VE não avaliada - Marcapasso"});
+        comboBoxDys = new JComboBoxSubcategory(new String[]{"", "VE normal, ao DT", "Sem sinais de aumento - VE", "Padrão de alteração do relaxamento", "DD - VE grau I", "DD - VE grau II", "DD - VE grau III(restritivo)", "Sinais de aumento - PD2VE", "VE não avaliada por arritmia", "VE não avaliada - Marcapasso"});
         jComboBoxSubcategories.add(comboBoxDys);
         
         jLabelSubcategories.add(new JLabelSubcategory("Movimento assincrônico SIV")); 
@@ -355,7 +355,7 @@ public final class CategoryLeftVentricle extends CategoryComponent {
         hashCategoryReport.put("DD - VE grau I", "Disfunção diastólica do VE de grau I. ");
         hashCategoryReport.put("DD - VE grau II", "Disfunção diastólica do VE de grau II. ");
         hashCategoryReport.put("DD - VE grau III(restritivo)", "Disfunção diastólica do VE de grau III (padrão restritivo). ");
-        hashCategoryReport.put("Sinais de aumento - VE", "Há sinais de aumento das pressões de enchimento do ventrículo esquerdo. ");
+        hashCategoryReport.put("Sinais de aumento - PD2VE", "Há sinais de aumento das pressões de enchimento do ventrículo esquerdo. ");
         hashCategoryReport.put("VE não avaliada por arritmia", "Função diastólica do VE não avaliada por arritmia. ");
         hashCategoryReport.put("VE não avaliada - Marcapasso", "Função diastólica do VE não avaliada devido a ritmo de marcapasso. ");
         hashCategoryReport.put("VE não avaliada - Valvopatia mitral", "Função diastólica do VE não avaliada devido à presença de valvopatia mitral. ");

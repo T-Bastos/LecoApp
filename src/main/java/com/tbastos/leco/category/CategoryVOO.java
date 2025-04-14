@@ -34,7 +34,7 @@ public final class CategoryVOO extends CategoryComponent {
     
     public CategoryVOO() {
         
-        jLabelCategory = new JLabelCategory("Via de saídas dos ventrículos");
+        jLabelCategory = new JLabelCategory("<html>Via de saídas <br>dos ventrículos</br></html>");
         jLabelSubcategories = new ArrayList<>();
         jComboBoxSubcategories = new ArrayList<>();
         arrayEditButton = new ArrayList<>();
@@ -162,7 +162,7 @@ public final class CategoryVOO extends CategoryComponent {
         field1.setText(vsve);
 
         Object[] input = new Object[2];
-        input[0] = "Diâmetro da VSVE:";
+        input[0] = "Diâmetro da VSVE(cm):";
         input[1] = field1;
 
         JOptionPane optionPane = new JOptionPane(

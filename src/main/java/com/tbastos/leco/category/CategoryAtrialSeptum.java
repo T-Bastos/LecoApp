@@ -101,7 +101,7 @@ public final class CategoryAtrialSeptum extends CategoryComponent {
         field2.setText(qq);
 
         Object[] input = new Object[4];
-        input[0] = "Fossa oval(mm):";
+        input[0] = "Medida(mm):";
         input[1] = field1;
         input[2] = "Qp/Qs:";
         input[3] = field2;
@@ -145,7 +145,7 @@ public final class CategoryAtrialSeptum extends CategoryComponent {
         hashCategoryReport.put("Membrana redundante", "Membrana da fossa oval redundante, sem fluxo transeptal ao Doppler. ");
         hashCategoryReport.put("FOP", "Presença de fluxo transeptal do átrio esquerdo para o direito em topografia anterossuperior. Achado sugestivo de forame oval patente. ");
         hashCategoryReport.put("FOP + membrana aneurismática", "Membrana da fossa oval aneurismática, com fluxo transeptal do átrio esquerdo para o direito em topografia anterossuperior. Achado sugestivo de forame oval patente. ");
-        hashCategoryReport.put("<html>CIA OS - <b>DEFINIR</b></html>", "Presença de defeito da membrana da fossa oval medindo " + oval + " mm, com fluxo transeptal do átrio esquerdo para o direito. Achado compatível com Comunicação interatrial do tipo ostium secundum. Qp/Qs estimado em " + qq + "(sugestivo de repercussão se > 1,5). ");
+        hashCategoryReport.put("<html>CIA OS - <b>DEFINIR</b></html>", "Presença de defeito da membrana da fossa oval medindo " + oval + " mm, com fluxo transeptal do átrio esquerdo para o direito. Achado compatível com Comunicação interatrial do tipo ostium secundum. Qp/Qs estimado em " + qq + " (sugestivo de repercussão se > 1,5). ");
         hashCategoryReport.put("Infiltração lipomatosa", "Infiltração lipomatosa do septo interatrial. ");
         hashCategoryReport.put("Hipertrofia lipomatosa", "Hipertrofia lipomatosa do septo interatrial. ");
     }      

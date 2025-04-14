@@ -23,7 +23,7 @@ public class JComboBoxSubcategory extends JComboBox {
             addItem(option);
         }
         
-        setMaximumRowCount(5);
+        setMaximumRowCount(7);
         setPreferredSize(new Dimension(X_COMBOBOX, Y_COMBOBOX));
     }
 }

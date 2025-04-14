@@ -45,7 +45,20 @@ public abstract class CategoryComponent {
     
     public String getCategoryTitle() {
         
-        return this.jLabelCategory.getText();
+        String categoryTitle = jLabelCategory.getText();
+        
+        if(categoryTitle.contains("<html>")) {
+        
+            categoryTitle = categoryTitle.replaceAll("<html>", "");
+            categoryTitle = categoryTitle.replaceAll("</html>", "");
+            categoryTitle = categoryTitle.replaceAll("<br>", "");
+            categoryTitle = categoryTitle.replaceAll("</br>", "");
+        } else {
+            
+            return categoryTitle;
+        }
+        
+        return categoryTitle;
     }
     
     public JResetButton getResetButton() {

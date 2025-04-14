@@ -160,10 +160,10 @@ public final class CategoryAorticValve extends CategoryComponent {
                 
                 if(selectedIndex == 5) {
                     
-                    jLabelCategory.setText("Prótese biológica em posição aórtica");
+                    jLabelCategory.setText("<html>Prótese biológica <br>em posição aórtica</br></html>");
                 } else if(selectedIndex == 6) {
                     
-                    jLabelCategory.setText("Prótese mecânica em posição aórtica");
+                    jLabelCategory.setText("<html>Prótese mecânica <br>em posição aórtica</br></html>");
                 } else {
                     
                     jLabelCategory.setText("Valva aórtica");

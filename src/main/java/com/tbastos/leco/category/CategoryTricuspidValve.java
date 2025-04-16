@@ -80,7 +80,7 @@ public final class CategoryTricuspidValve extends CategoryComponent {
         jComboBoxSubcategories.add(comboBoxCalcification);
         
         jLabelSubcategories.add(new JLabelSubcategory("Abertura / Mobilidade prótese")); 
-        comboBoxMobility = new JComboBoxSubcategory(new String[]{"", "Preservada", "Discreta", "Moderada", "Importante"});
+        comboBoxMobility = new JComboBoxSubcategory(new String[]{"", "Preservada", "Reduzida em grau discreto", "Reduzida em grau moderado", "Reduzida em grau importante", "Reduzida em grau não significativo", "Reduzida em grau significativo"});
         comboBoxMobility.setEnabled(false);
         jComboBoxSubcategories.add(comboBoxMobility);
         
@@ -88,6 +88,14 @@ public final class CategoryTricuspidValve extends CategoryComponent {
         comboBoxReflux = new JComboBoxSubcategory(new String[]{"", "Ausente", "Discreto", "Moderado", "Importante"});
         comboBoxReflux.setEnabled(false);
         jComboBoxSubcategories.add(comboBoxReflux);
+        
+        jLabelSubcategories.add(new JLabelSubcategory("Orifício efetivo regurgitante")); 
+        comboBoxOrifice = new JComboBoxSubcategory(new String[]{"", "<html>Orifício - <b>DEFINIR</b></html>"});
+        comboBoxOrifice.setName("Orifice");
+        jComboBoxSubcategories.add(comboBoxOrifice);
+        editButtonOrifice = new JEditButton();
+        editButtonOrifice.setName("Orifice");
+        arrayEditButton.add(editButtonOrifice);
         
         jLabelSubcategories.add(new JLabelSubcategory("Gradiente médio")); 
         comboMidBoxGradient = new JComboBoxSubcategory(new String[]{"", "<html>Gradiente médio - <b>DEFINIR</b></html>"});
@@ -113,14 +121,6 @@ public final class CategoryTricuspidValve extends CategoryComponent {
         editButtonValveArea.setName("ValveArea");
         arrayEditButton.add(editButtonValveArea);
         
-        jLabelSubcategories.add(new JLabelSubcategory("Orifício efetivo regurgitante")); 
-        comboBoxOrifice = new JComboBoxSubcategory(new String[]{"", "<html>Orifício - <b>DEFINIR</b></html>"});
-        comboBoxOrifice.setName("Orifice");
-        jComboBoxSubcategories.add(comboBoxOrifice);
-        editButtonOrifice = new JEditButton();
-        editButtonOrifice.setName("Orifice");
-        arrayEditButton.add(editButtonOrifice);
-        
         setHashCategoryReport();
         setCategoryListeners();
     }
@@ -144,7 +144,7 @@ public final class CategoryTricuspidValve extends CategoryComponent {
                     
                     editButtonDisp.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     editButtonDisp.setEnabled(true);
@@ -169,7 +169,7 @@ public final class CategoryTricuspidValve extends CategoryComponent {
                     
                     editMidButtonGradient.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     editMidButtonGradient.setEnabled(true);
@@ -194,7 +194,7 @@ public final class CategoryTricuspidValve extends CategoryComponent {
                     
                     editButtonPht.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     editButtonPht.setEnabled(true);
@@ -219,7 +219,7 @@ public final class CategoryTricuspidValve extends CategoryComponent {
                     
                     editButtonValveArea.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     editButtonValveArea.setEnabled(true);
@@ -244,7 +244,7 @@ public final class CategoryTricuspidValve extends CategoryComponent {
                     
                     editButtonOrifice.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     editButtonOrifice.setEnabled(true);
@@ -311,7 +311,7 @@ public final class CategoryTricuspidValve extends CategoryComponent {
                 }
                 
                 setHashCategoryReport();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
         
@@ -329,7 +329,7 @@ public final class CategoryTricuspidValve extends CategoryComponent {
                 }
                 
                 setHashCategoryReport();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
         
@@ -347,7 +347,7 @@ public final class CategoryTricuspidValve extends CategoryComponent {
                 }
                 
                 setHashCategoryReport();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
         
@@ -365,7 +365,7 @@ public final class CategoryTricuspidValve extends CategoryComponent {
                 }
                 
                 setHashCategoryReport();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
         
@@ -383,7 +383,7 @@ public final class CategoryTricuspidValve extends CategoryComponent {
                 }
                 
                 setHashCategoryReport();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
     }
@@ -422,7 +422,7 @@ public final class CategoryTricuspidValve extends CategoryComponent {
         }   
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
     }
     
     private void fillFormMidGradient() {
@@ -459,7 +459,7 @@ public final class CategoryTricuspidValve extends CategoryComponent {
         }   
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
     }
     
     private void fillFormPht() {
@@ -496,7 +496,7 @@ public final class CategoryTricuspidValve extends CategoryComponent {
         }   
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
     }
     
     private void fillFormValveArea() {
@@ -541,7 +541,7 @@ public final class CategoryTricuspidValve extends CategoryComponent {
         }   
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
     }
     
     private void fillFormOrifice() {
@@ -578,7 +578,7 @@ public final class CategoryTricuspidValve extends CategoryComponent {
         }  
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
     }
      
     @Override
@@ -606,6 +606,11 @@ public final class CategoryTricuspidValve extends CategoryComponent {
         hashCategoryReport.put("Discreto", "");
         hashCategoryReport.put("Moderado", "");
         hashCategoryReport.put("Importante", "");
+        hashCategoryReport.put("Reduzida em grau discreto", "");
+        hashCategoryReport.put("Reduzida em grau moderado", "");
+        hashCategoryReport.put("Reduzida em grau importante", "");
+        hashCategoryReport.put("Reduzida em grau não significativo", "");
+        hashCategoryReport.put("Reduzida em grau significativo", "");
         hashCategoryReport.put("<html>Deslocamento - <b>DEFINIR</b></html>", "");
         hashCategoryReport.put("<html>Gradiente médio - <b>DEFINIR</b></html>", "Gradiente médio: " + midGradient + " mmHg. ");
         hashCategoryReport.put("<html>PHT - <b>DEFINIR</b></html>", "Tempo de meia pressão (PHT) estimado em " + pht + " ms. ");

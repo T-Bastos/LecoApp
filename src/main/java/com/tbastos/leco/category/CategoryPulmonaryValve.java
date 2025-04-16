@@ -31,6 +31,7 @@ public final class CategoryPulmonaryValve extends CategoryComponent {
     private String midGradient = "XXX";
     private String maxGradient = "XXX";
     private String valveArea = "XXX";
+    private String pht = "XXX";
     private final JComboBoxSubcategory comboBoxModel;
     private final JComboBoxSubcategory comboBoxThickening;
     private final JComboBoxSubcategory comboBoxMobility;
@@ -38,7 +39,9 @@ public final class CategoryPulmonaryValve extends CategoryComponent {
     private final JComboBoxSubcategory comboBoxCalcification;
     private final JComboBoxSubcategory comboBoxMaxGradient;
     private final JComboBoxSubcategory comboBoxMidGradient;
+    private final JComboBoxSubcategory comboBoxPht;
     private final JComboBoxSubcategory comboBoxValveArea;
+    private final JEditButton editButtonPht;
     private final JEditButton editButtonMaxGradient;
     private final JEditButton editButtonMidGradient;
     private final JEditButton editButtonValveArea;
@@ -65,7 +68,7 @@ public final class CategoryPulmonaryValve extends CategoryComponent {
         jComboBoxSubcategories.add(comboBoxCalcification);
         
         jLabelSubcategories.add(new JLabelSubcategory("Abertura / Mobilidade prótese")); 
-        comboBoxMobility = new JComboBoxSubcategory(new String[]{"", "Preservada", "Discreta", "Moderada", "Importante"});
+        comboBoxMobility = new JComboBoxSubcategory(new String[]{"", "Preservada", "Reduzida em grau discreto", "Reduzida em grau moderado", "Reduzida em grau importante", "Reduzida em grau não significativo", "Reduzida em grau significativo"});
         comboBoxMobility.setEnabled(false);
         jComboBoxSubcategories.add(comboBoxMobility);
         
@@ -90,6 +93,14 @@ public final class CategoryPulmonaryValve extends CategoryComponent {
         editButtonMidGradient.setName("MidGradient");
         arrayEditButton.add(editButtonMidGradient);
         
+        jLabelSubcategories.add(new JLabelSubcategory("PHT")); 
+        comboBoxPht = new JComboBoxSubcategory(new String[]{"", "<html>PHT - <b>DEFINIR</b></html>"});
+        comboBoxPht.setName("Pht");
+        jComboBoxSubcategories.add(comboBoxPht);
+        editButtonPht = new JEditButton();
+        editButtonPht.setName("Pht");
+        arrayEditButton.add(editButtonPht);
+        
         jLabelSubcategories.add(new JLabelSubcategory("Área valvar")); 
         comboBoxValveArea = new JComboBoxSubcategory(new String[]{"", "<html>Equação de continuidade - <b>DEFINIR</b></html>", "<html>Planimetria - <b>DEFINIR</b></html>"});
         comboBoxValveArea.setName("ValveArea");
@@ -105,6 +116,30 @@ public final class CategoryPulmonaryValve extends CategoryComponent {
     @Override
     protected void setCategoryListeners() {
     
+        editButtonPht.addActionListener((ActionEvent e) -> {
+            
+            fillFormPht();
+        });
+        
+        comboBoxPht.addItemListener((ItemEvent e) -> {
+            
+            if(e.getStateChange() == ItemEvent.SELECTED) {
+                
+                checkResetButton();
+                pht = "XXX";
+                
+                if(comboBoxPht.getSelectedIndex() == 0) {
+                    
+                    editButtonPht.setEnabled(false);
+                    setHashCategoryReport();
+                    Report.getReport().updateReportPane();
+                } else {
+                    
+                    editButtonPht.setEnabled(true);
+                    fillFormPht();
+                }
+            }
+        });
         
         comboBoxModel.addItemListener((ItemEvent e) -> {
             
@@ -141,7 +176,7 @@ public final class CategoryPulmonaryValve extends CategoryComponent {
                 }
                 
                 setHashCategoryReport();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
         
@@ -159,7 +194,7 @@ public final class CategoryPulmonaryValve extends CategoryComponent {
                 }
                 
                 setHashCategoryReport();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
         
@@ -177,7 +212,7 @@ public final class CategoryPulmonaryValve extends CategoryComponent {
                 }
                             
                 setHashCategoryReport();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
         
@@ -195,7 +230,7 @@ public final class CategoryPulmonaryValve extends CategoryComponent {
                 }
                 
                 setHashCategoryReport();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
         
@@ -213,7 +248,7 @@ public final class CategoryPulmonaryValve extends CategoryComponent {
                 }
                 
                 setHashCategoryReport();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
         
@@ -233,7 +268,7 @@ public final class CategoryPulmonaryValve extends CategoryComponent {
                     
                     editButtonMaxGradient.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     editButtonMaxGradient.setEnabled(true);
@@ -257,7 +292,7 @@ public final class CategoryPulmonaryValve extends CategoryComponent {
                     midGradient = "XXX";
                     editButtonMidGradient.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     midGradient = "XXX";
@@ -283,7 +318,7 @@ public final class CategoryPulmonaryValve extends CategoryComponent {
                     
                     editButtonValveArea.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     editButtonValveArea.setEnabled(true);
@@ -328,7 +363,7 @@ public final class CategoryPulmonaryValve extends CategoryComponent {
         }   
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
     }
     
     private void fillFormMidGradient() {
@@ -365,7 +400,44 @@ public final class CategoryPulmonaryValve extends CategoryComponent {
         }   
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
+    }
+    
+    private void fillFormPht() {
+        
+        JTextField field1 = new JTextField(10);
+        field1.setText(pht);
+
+        Object[] input = new Object[2];
+        input[0] = "Tempo de meia pressão estimado(ms):";
+        input[1] = field1;
+
+        JOptionPane optionPane = new JOptionPane(
+                input,
+                JOptionPane.PLAIN_MESSAGE,
+                JOptionPane.OK_CANCEL_OPTION
+        );
+
+        JDialog dialog = optionPane.createDialog("Defina os parâmetros");
+
+        Timer timer = new Timer(100, (ActionEvent e) -> {
+            field1.requestFocusInWindow();
+        });
+        
+        timer.setRepeats(false);
+        timer.start();
+
+        dialog.setVisible(true);
+        
+        Object selectedValue = optionPane.getValue();
+        
+        if (selectedValue instanceof Integer && (Integer) selectedValue == JOptionPane.OK_OPTION) {
+
+            pht = field1.getText();
+        }   
+        
+        setHashCategoryReport();
+        Report.getReport().updateReportPane();
     }
     
     private void fillFormValveArea() {
@@ -410,7 +482,7 @@ public final class CategoryPulmonaryValve extends CategoryComponent {
         }   
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
     }
     
     @Override
@@ -429,13 +501,18 @@ public final class CategoryPulmonaryValve extends CategoryComponent {
         hashCategoryReport.put("Normal", "");
         hashCategoryReport.put("Discreto", "");
         hashCategoryReport.put("Moderado", "");
-        hashCategoryReport.put("Importante", "");
         hashCategoryReport.put("Mínima", "");
         hashCategoryReport.put("Discreta", "");
         hashCategoryReport.put("Moderada", "");
         hashCategoryReport.put("Importante", "");
         hashCategoryReport.put("Preservada", "");
         hashCategoryReport.put("Ausente", "");
+        hashCategoryReport.put("Reduzida em grau discreto", "");
+        hashCategoryReport.put("Reduzida em grau moderado", "");
+        hashCategoryReport.put("Reduzida em grau importante", "");
+        hashCategoryReport.put("Reduzida em grau não significativo", "");
+        hashCategoryReport.put("Reduzida em grau significativo", "");
+        hashCategoryReport.put("<html>PHT - <b>DEFINIR</b></html>", "Tempo de meia pressão (PHT) estimado em " + pht + " ms. ");
         hashCategoryReport.put("<html>Gradiente máximo - <b>DEFINIR</b></html>", "Gradiente máximo: " + maxGradient + " mmHg. ");
         hashCategoryReport.put("<html>Gradiente médio - <b>DEFINIR</b></html>", "Gradiente médio: " + midGradient + " mmHg. ");
         hashCategoryReport.put("<html>Equação de continuidade - <b>DEFINIR</b></html>", "Área valvar: " + valveArea + " cm² (equação de continuidade). ");

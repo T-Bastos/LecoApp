@@ -4,7 +4,6 @@
  */
 package com.tbastos.leco.selectionui;
 
-import java.awt.Dimension;
 import javax.swing.JLabel;
 
 /**

@@ -66,7 +66,7 @@ public final class CategoryLeftAtrium extends CategoryComponent {
                     
                     editButtonSize.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     editButtonSize.setEnabled(true);
@@ -110,7 +110,7 @@ public final class CategoryLeftAtrium extends CategoryComponent {
         }   
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
     }
     
     @Override

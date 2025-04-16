@@ -8,6 +8,7 @@ import com.tbastos.leco.selectionui.JComboBoxSubcategory;
 import com.tbastos.leco.selectionui.JEditButton;
 import com.tbastos.leco.selectionui.JLabelCategory;
 import com.tbastos.leco.selectionui.JLabelSubcategory;
+import com.tbastos.leco.selectionui.JNormalButton;
 import com.tbastos.leco.selectionui.JResetButton;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ public abstract class CategoryComponent {
     protected HashMap<String, String> hashCategoryReport = null;
     protected ArrayList<JEditButton> arrayEditButton = null;
     protected JResetButton resetButton = null;
+    protected JNormalButton normalButton = null;
     
     public ArrayList<JLabelSubcategory> getJLabelSubcategories() {
         
@@ -70,7 +72,7 @@ public abstract class CategoryComponent {
             
             this.resetButton.addActionListener((ActionEvent e) -> {
                 
-                int choiceConfirm = JOptionPane.showConfirmDialog(null, "Ao reiniciar a categoria, todas as opções irão voltar para o padrão de não preenchidas" , "CONFIRMAÇÃO DE REINÍCIO DE CATEGORIA", JOptionPane.YES_NO_OPTION);
+                int choiceConfirm = JOptionPane.showConfirmDialog(null, "Ao reiniciar a categoria, todas as opções irão voltar para o padrão de não preenchidas" , "Confirmação de reinício de categoria", JOptionPane.YES_NO_OPTION);
 
                 if (choiceConfirm == JOptionPane.OK_OPTION) {
 
@@ -79,8 +81,29 @@ public abstract class CategoryComponent {
             });
         }
         
-        return this.resetButton;
+        return this.resetButton; 
+    }
+    
+        public JNormalButton getNormalButton() {
         
+        if(this.normalButton == null) { 
+        
+            this.normalButton = new JNormalButton();
+            this.normalButton.setEnabled(true);
+            
+            getNormalButton().addActionListener((ActionEvent e) -> {
+        
+                int choiceConfirm = JOptionPane.showConfirmDialog(null, "Normalizar categoria?" , "Confirmação de normalização de categoria", JOptionPane.YES_NO_OPTION);
+
+                if (choiceConfirm == JOptionPane.OK_OPTION) {
+
+                    setIndex0ComboBoxes();
+                    setNormalComboBoxes();   
+                }
+            });
+        }
+        
+        return this.normalButton; 
     }
     
     public String getCategoryText() {

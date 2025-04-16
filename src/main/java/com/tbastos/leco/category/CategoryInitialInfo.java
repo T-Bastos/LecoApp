@@ -76,7 +76,7 @@ public final class CategoryInitialInfo extends CategoryComponent {
                     
                     editButtonPosOp.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     editButtonPosOp.setEnabled(true);
@@ -90,7 +90,7 @@ public final class CategoryInitialInfo extends CategoryComponent {
             if(e.getStateChange() == ItemEvent.SELECTED) {
                 
                 checkResetButton();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
         
@@ -99,7 +99,7 @@ public final class CategoryInitialInfo extends CategoryComponent {
             if(e.getStateChange() == ItemEvent.SELECTED) {
                 
                 checkResetButton();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
     }
@@ -146,7 +146,7 @@ public final class CategoryInitialInfo extends CategoryComponent {
         }   
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
     }
     
     @Override

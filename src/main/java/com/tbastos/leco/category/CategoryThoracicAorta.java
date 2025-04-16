@@ -47,7 +47,7 @@ public final class CategoryThoracicAorta extends CategoryComponent {
             if(e.getStateChange() == ItemEvent.SELECTED) {
                 
                 checkResetButton();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
         
@@ -56,7 +56,7 @@ public final class CategoryThoracicAorta extends CategoryComponent {
             if(e.getStateChange() == ItemEvent.SELECTED) {
                 
                 checkResetButton();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
     }

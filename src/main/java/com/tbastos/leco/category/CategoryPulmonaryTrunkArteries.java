@@ -82,7 +82,7 @@ public final class CategoryPulmonaryTrunkArteries extends CategoryComponent {
                     
                     editButtonPressure.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     editButtonPressure.setEnabled(true);
@@ -107,7 +107,7 @@ public final class CategoryPulmonaryTrunkArteries extends CategoryComponent {
                     
                     editButtonDiamet.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     editButtonDiamet.setEnabled(true);
@@ -121,7 +121,7 @@ public final class CategoryPulmonaryTrunkArteries extends CategoryComponent {
             if(e.getStateChange() == ItemEvent.SELECTED) {
                 
                 checkResetButton();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
     }
@@ -160,7 +160,7 @@ public final class CategoryPulmonaryTrunkArteries extends CategoryComponent {
         }  
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();        
+        Report.getReport().updateReportPane();        
     }
     
     private void fillFormPressure() {
@@ -197,7 +197,7 @@ public final class CategoryPulmonaryTrunkArteries extends CategoryComponent {
         }  
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
     }
     
     @Override

@@ -34,7 +34,6 @@ public final class CategoryPericardium extends CategoryComponent {
     private final JComboBoxSubcategory comboBoxEffusionDegree;
     private final JComboBoxSubcategory comboBoxRestriction;
     private final JComboBoxSubcategory comboBoxBlade;
-    private final JEditButton editButtonModel;
     private final JEditButton editButtonBlade;
     
     public CategoryPericardium() {
@@ -45,27 +44,27 @@ public final class CategoryPericardium extends CategoryComponent {
         arrayEditButton = new ArrayList<>();
         
         jLabelSubcategories.add(new JLabelSubcategory("Modelo")); 
-        comboBoxModel = new JComboBoxSubcategory(new String[]{"", "Normal", "<html>Derrame pericárdico - <b>DEFINIR</b></html>"});
-        comboBoxModel.setName("Model");
+        comboBoxModel = new JComboBoxSubcategory(new String[]{"", "Normal", "Derrame pericárdico"});
         jComboBoxSubcategories.add(comboBoxModel);
-        editButtonModel = new JEditButton();
-        editButtonModel.setName("Model");
-        arrayEditButton.add(editButtonModel);
         
         jLabelSubcategories.add(new JLabelSubcategory("Localização do derrame")); 
-        comboBoxEffusion = new JComboBoxSubcategory(new String[]{"", "Difuso", "Topografia anterior", "Topografia posterior"});
+        comboBoxEffusion = new JComboBoxSubcategory(new String[]{"", "Anterior", "Posterior", "Difuso"});
+        comboBoxEffusion.setEnabled(false);
         jComboBoxSubcategories.add(comboBoxEffusion);
         
         jLabelSubcategories.add(new JLabelSubcategory("Grau do derrame")); 
-        comboBoxEffusionDegree = new JComboBoxSubcategory(new String[]{"", "Discreto", "Moderado", "Importante"});
+        comboBoxEffusionDegree = new JComboBoxSubcategory(new String[]{"", "Mínimo", "Discreto", "Moderado", "Importante"});
+        comboBoxEffusionDegree.setEnabled(false);
         jComboBoxSubcategories.add(comboBoxEffusionDegree);
         
         jLabelSubcategories.add(new JLabelSubcategory("Sinais de restrição")); 
-        comboBoxRestriction = new JComboBoxSubcategory(new String[]{"", "Sem sinais", "Com sinais"});
+        comboBoxRestriction = new JComboBoxSubcategory(new String[]{"", "Ausência", "Presença"});
+        comboBoxRestriction.setEnabled(false);
         jComboBoxSubcategories.add(comboBoxRestriction);
         
         jLabelSubcategories.add(new JLabelSubcategory("Lâmina")); 
         comboBoxBlade = new JComboBoxSubcategory(new String[]{"", "<html>Lâmina - <b>DEFINIR</b></html>"});
+        comboBoxBlade.setEnabled(false);
         comboBoxBlade.setName("Blade");
         jComboBoxSubcategories.add(comboBoxBlade);
         editButtonBlade = new JEditButton();
@@ -95,7 +94,7 @@ public final class CategoryPericardium extends CategoryComponent {
                     
                     editButtonBlade.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     editButtonBlade.setEnabled(true);
@@ -103,31 +102,30 @@ public final class CategoryPericardium extends CategoryComponent {
                 }
             }
         });
-        
-        editButtonModel.addActionListener((ActionEvent e) -> {
-            
-            fillFormModel();
-        });
                 
         comboBoxModel.addItemListener((ItemEvent e) -> {
             
             if(e.getStateChange() == ItemEvent.SELECTED) {
                 
                 checkResetButton();
-                effusion = "XXX";
-                degreeEffusion = "XXX";
-                restriction = "XXX";
+                int selectedIndex = comboBoxModel.getSelectedIndex();
                 
-                if(comboBoxModel.getSelectedIndex() == 0 || comboBoxModel.getSelectedIndex() == 1) {
+                if(selectedIndex == 0 || selectedIndex == 1) {
                     
-                    editButtonModel.setEnabled(false);
-                    setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
-                } else {
+                    comboBoxEffusion.setEnabled(false);
+                    comboBoxEffusionDegree.setEnabled(false);
+                    comboBoxRestriction.setEnabled(false);
+                    comboBoxBlade.setEnabled(false);
+                } else if(selectedIndex == 2){
                     
-                    editButtonModel.setEnabled(true);
-                    fillFormModel();
+                    comboBoxEffusion.setEnabled(true);
+                    comboBoxEffusionDegree.setEnabled(true);
+                    comboBoxRestriction.setEnabled(true);
+                    comboBoxBlade.setEnabled(true);
                 }
+                
+                setHashCategoryReport();
+                Report.getReport().updateReportPane();
             }
         });
         
@@ -136,8 +134,16 @@ public final class CategoryPericardium extends CategoryComponent {
             if(e.getStateChange() == ItemEvent.SELECTED) {
                 
                 checkResetButton();
+                if(comboBoxRestriction.getSelectedIndex() != 0) {
+                    
+                    restriction = comboBoxRestriction.getSelectedItem().toString().toLowerCase();
+                } else {
+                    
+                    restriction = "XXX";
+                }
                 setHashCategoryReport();
-                Report.getReport().getAndUpdateReportPane();
+                setHashCategoryReport();
+                Report.getReport().updateReportPane();
             }
         });
         
@@ -146,8 +152,15 @@ public final class CategoryPericardium extends CategoryComponent {
             if(e.getStateChange() == ItemEvent.SELECTED) {
                 
                 checkResetButton();
+                if(comboBoxEffusionDegree.getSelectedIndex() != 0) {
+                    
+                    degreeEffusion = comboBoxEffusionDegree.getSelectedItem().toString().toLowerCase();
+                } else {
+                    
+                    degreeEffusion = "XXX";
+                }
                 setHashCategoryReport();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
         
@@ -156,57 +169,17 @@ public final class CategoryPericardium extends CategoryComponent {
             if(e.getStateChange() == ItemEvent.SELECTED) {
                 
                 checkResetButton();
+                if(comboBoxEffusion.getSelectedIndex() != 0) {
+                    
+                    effusion = comboBoxEffusion.getSelectedItem().toString().toLowerCase();
+                } else {
+                    
+                    effusion = "XXX";
+                }
                 setHashCategoryReport();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
-    }
-    
-    private void fillFormModel() {
-    
-        JTextField field1 = new JTextField(10);
-        field1.setText(effusion);
-        JTextField field2 = new JTextField(10);
-        field2.setText(degreeEffusion);
-        JTextField field3 = new JTextField(10);
-        field3.setText(restriction);
-
-        Object[] input = new Object[6];
-        input[0] = "Derrame pericárdico:";
-        input[1] = field1;
-        input[2] = "Grau do derrame:";
-        input[3] = field2;
-        input[4] = "Sinais de restrição:";
-        input[5] = field3;
-
-        JOptionPane optionPane = new JOptionPane(
-                input,
-                JOptionPane.PLAIN_MESSAGE,
-                JOptionPane.OK_CANCEL_OPTION
-        );
-
-        JDialog dialog = optionPane.createDialog("Defina os parâmetros");
-
-        Timer timer = new Timer(100, (ActionEvent e) -> {
-            field1.requestFocusInWindow();
-        });
-        
-        timer.setRepeats(false);
-        timer.start();
-
-        dialog.setVisible(true);
-        
-        Object selectedValue = optionPane.getValue();
-        
-        if (selectedValue instanceof Integer && (Integer) selectedValue == JOptionPane.OK_OPTION) {
-
-            effusion = field1.getText();
-            degreeEffusion = field2.getText();
-            restriction = field3.getText();
-        }   
-        
-        setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
     }
     
     private void fillFormBlade() {
@@ -243,7 +216,7 @@ public final class CategoryPericardium extends CategoryComponent {
         }  
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
     }
     
     @Override
@@ -252,22 +225,22 @@ public final class CategoryPericardium extends CategoryComponent {
         hashCategoryReport = new HashMap<>();
         hashCategoryReport.put("", "");
         hashCategoryReport.put("Normal", "Normal. ");
-        hashCategoryReport.put("<html>Derrame pericárdico - <b>DEFINIR</b></html>", "Presença de derrame pericárdico " + effusion + " de grau " + degreeEffusion + ", " + restriction + " sinais de restrição ao enchimento ventricular. ");
-        hashCategoryReport.put("Difuso", "Difuso. ");
-        hashCategoryReport.put("Topografia anterior", "Localização do derrame na topografia anterior. ");
-        hashCategoryReport.put("Topografia posterior", "Localização do derrame na topografia posterior. ");
-        hashCategoryReport.put("Discreto", "Grau do derrame discreto. ");
-        hashCategoryReport.put("Moderado", "Grau do derrame moderado. ");
-        hashCategoryReport.put("Importante", "Grau do derrame importante. ");
-        hashCategoryReport.put("Sem sinais", "Sem sinais de restrição. ");
-        hashCategoryReport.put("Com sinais", "Com sinais de restrição. ");
+        hashCategoryReport.put("Derrame pericárdico", "Presença de derrame pericárdico " + effusion + " de grau " + degreeEffusion + ", " + restriction + " de sinais de restrição ao enchimento ventricular. ");
+        hashCategoryReport.put("Difuso", "");
+        hashCategoryReport.put("Anterior", "");
+        hashCategoryReport.put("Posterior", "");
+        hashCategoryReport.put("Mínimo", "");
+        hashCategoryReport.put("Discreto", "");
+        hashCategoryReport.put("Moderado", "");
+        hashCategoryReport.put("Importante", "");
+        hashCategoryReport.put("Ausência", "");
+        hashCategoryReport.put("Presença", "");
         hashCategoryReport.put("<html>Lâmina - <b>DEFINIR</b></html>", "A maior lâmina do derrame mede " + biggestBlade + " mm. ");
     }      
     
     @Override
     public void setNormalComboBoxes() {
         
-        editButtonModel.setEnabled(false);
         editButtonBlade.setEnabled(false);
         comboBoxModel.setSelectedIndex(1);
     }

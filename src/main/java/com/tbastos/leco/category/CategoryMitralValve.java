@@ -16,7 +16,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -92,6 +91,14 @@ public final class CategoryMitralValve extends CategoryComponent {
         comboBoxReflux.setEnabled(false);
         jComboBoxSubcategories.add(comboBoxReflux);    
         
+        jLabelSubcategories.add(new JLabelSubcategory("Orifício efetivo regurgitante")); 
+        comboBoxOrifice = new JComboBoxSubcategory(new String[]{"", "<html>Orifício - <b>DEFINIR</b></html>"});
+        comboBoxOrifice.setName("Orifice");
+        jComboBoxSubcategories.add(comboBoxOrifice);
+        editButtonOrifice = new JEditButton();
+        editButtonOrifice.setName("Orifice");
+        arrayEditButton.add(editButtonOrifice);
+        
         jLabelSubcategories.add(new JLabelSubcategory("Escore de Wilkins")); 
         comboBoxWilkins = new JComboBoxSubcategory(new String[]{"", "<html>Escore de Wilkins - <b>DEFINIR</b></html>"});
         comboBoxWilkins.setName("Wilkins");
@@ -129,14 +136,6 @@ public final class CategoryMitralValve extends CategoryComponent {
         editButtonValveArea.setName("ValveArea");
         arrayEditButton.add(editButtonValveArea);
         
-        jLabelSubcategories.add(new JLabelSubcategory("Orifício efetivo regurgitante")); 
-        comboBoxOrifice = new JComboBoxSubcategory(new String[]{"", "<html>Orifício - <b>DEFINIR</b></html>"});
-        comboBoxOrifice.setName("Orifice");
-        jComboBoxSubcategories.add(comboBoxOrifice);
-        editButtonOrifice = new JEditButton();
-        editButtonOrifice.setName("Orifice");
-        arrayEditButton.add(editButtonOrifice);
-        
         setHashCategoryReport();
         setCategoryListeners();
     }
@@ -164,7 +163,7 @@ public final class CategoryMitralValve extends CategoryComponent {
                     
                     editButtonWilkins.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     editButtonWilkins.setEnabled(true);
@@ -189,7 +188,7 @@ public final class CategoryMitralValve extends CategoryComponent {
                     
                     editButtonGradient.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     editButtonGradient.setEnabled(true);
@@ -214,7 +213,7 @@ public final class CategoryMitralValve extends CategoryComponent {
                     
                     editButtonPht.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     editButtonPht.setEnabled(true);
@@ -239,7 +238,7 @@ public final class CategoryMitralValve extends CategoryComponent {
                     
                     editButtonValveArea.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     editButtonValveArea.setEnabled(true);
@@ -263,7 +262,7 @@ public final class CategoryMitralValve extends CategoryComponent {
                     orifice = "XXX";
                     editButtonOrifice.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     orifice = "XXX";
@@ -333,7 +332,7 @@ public final class CategoryMitralValve extends CategoryComponent {
                     comboBoxWilkins.setSelectedIndex(0);
                 }
                 
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
         
@@ -351,7 +350,7 @@ public final class CategoryMitralValve extends CategoryComponent {
                 }
                 
                 setHashCategoryReport();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
         
@@ -369,7 +368,7 @@ public final class CategoryMitralValve extends CategoryComponent {
                 }
                 
                 setHashCategoryReport();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
         
@@ -387,7 +386,7 @@ public final class CategoryMitralValve extends CategoryComponent {
                 }
                 
                 setHashCategoryReport();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
         
@@ -405,7 +404,7 @@ public final class CategoryMitralValve extends CategoryComponent {
                 }
                 
                 setHashCategoryReport();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
         
@@ -414,7 +413,7 @@ public final class CategoryMitralValve extends CategoryComponent {
             if(e.getStateChange() == ItemEvent.SELECTED) {
                 
                 checkResetButton();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
     }
@@ -453,7 +452,7 @@ public final class CategoryMitralValve extends CategoryComponent {
         }   
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
     }
     
     private void fillFormValveArea() {
@@ -498,7 +497,7 @@ public final class CategoryMitralValve extends CategoryComponent {
         }   
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
     }
     
     private void fillFormPht() {
@@ -535,7 +534,7 @@ public final class CategoryMitralValve extends CategoryComponent {
         }   
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
     }
     
     private void fillFormGradient() {
@@ -572,7 +571,7 @@ public final class CategoryMitralValve extends CategoryComponent {
         }   
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
     }
     
     private void fillFormWilkins() {
@@ -690,7 +689,7 @@ public final class CategoryMitralValve extends CategoryComponent {
         }   
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
     }
     
     @Override

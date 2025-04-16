@@ -79,7 +79,7 @@ public final class CategoryVOO extends CategoryComponent {
                     
                     editButtonObstruction.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     editButtonObstruction.setEnabled(true);
@@ -104,7 +104,7 @@ public final class CategoryVOO extends CategoryComponent {
                     
                     editButtonDiamet.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     editButtonDiamet.setEnabled(true);
@@ -153,7 +153,7 @@ public final class CategoryVOO extends CategoryComponent {
         }   
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
     }
     
     private void fillFormDiamet() {
@@ -190,7 +190,7 @@ public final class CategoryVOO extends CategoryComponent {
         }   
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
     }
     
     @Override

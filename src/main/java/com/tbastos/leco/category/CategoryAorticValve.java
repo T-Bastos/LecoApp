@@ -78,7 +78,7 @@ public final class CategoryAorticValve extends CategoryComponent {
         jComboBoxSubcategories.add(comboBoxCalcification);
         
         jLabelSubcategories.add(new JLabelSubcategory("Abertura / Mobilidade prótese")); 
-        comboBoxMobility = new JComboBoxSubcategory(new String[]{"", "Preservada", "Discreta", "Moderada", "Importante"});
+        comboBoxMobility = new JComboBoxSubcategory(new String[]{"", "Preservada", "Reduzida em grau discreto", "Reduzida em grau moderado", "Reduzida em grau importante", "Reduzida em grau não significativo", "Reduzida em grau significativo"});
         comboBoxMobility.setEnabled(false);
         jComboBoxSubcategories.add(comboBoxMobility);
         
@@ -86,6 +86,14 @@ public final class CategoryAorticValve extends CategoryComponent {
         comboBoxReflux = new JComboBoxSubcategory(new String[]{"", "Ausente", "Discreto", "Moderado", "Importante"});
         comboBoxReflux.setEnabled(false);
         jComboBoxSubcategories.add(comboBoxReflux);
+        
+        jLabelSubcategories.add(new JLabelSubcategory("Orifício efetivo regurgitante")); 
+        comboBoxOrifice = new JComboBoxSubcategory(new String[]{"", "<html>Orifício - <b>DEFINIR</b></html>"});
+        comboBoxOrifice.setName("Orifice");
+        jComboBoxSubcategories.add(comboBoxOrifice);
+        editButtonOrifice = new JEditButton();
+        editButtonOrifice.setName("Orifice");
+        arrayEditButton.add(editButtonOrifice);
         
         jLabelSubcategories.add(new JLabelSubcategory("Rafe")); 
         comboBoxRaphe = new JComboBoxSubcategory(new String[]{"", "<html>Rafe das Válvulas - <b>DEFINIR</b></html>"});
@@ -135,14 +143,6 @@ public final class CategoryAorticValve extends CategoryComponent {
         editButtonTacTe = new JEditButton();
         editButtonTacTe.setName("TacTe");
         arrayEditButton.add(editButtonTacTe);
-        
-        jLabelSubcategories.add(new JLabelSubcategory("Orifício efetivo regurgitante")); 
-        comboBoxOrifice = new JComboBoxSubcategory(new String[]{"", "<html>Orifício - <b>DEFINIR</b></html>"});
-        comboBoxOrifice.setName("Orifice");
-        jComboBoxSubcategories.add(comboBoxOrifice);
-        editButtonOrifice = new JEditButton();
-        editButtonOrifice.setName("Orifice");
-        arrayEditButton.add(editButtonOrifice);
         
         setHashCategoryReport();  
         setCategoryListeners();
@@ -208,7 +208,7 @@ public final class CategoryAorticValve extends CategoryComponent {
                 }
                 
                 setHashCategoryReport();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
         
@@ -226,7 +226,7 @@ public final class CategoryAorticValve extends CategoryComponent {
                 }
                 
                 setHashCategoryReport();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
         
@@ -244,7 +244,7 @@ public final class CategoryAorticValve extends CategoryComponent {
                 }
                 
                 setHashCategoryReport();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
         
@@ -262,7 +262,7 @@ public final class CategoryAorticValve extends CategoryComponent {
                 }
                 
                 setHashCategoryReport();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
         
@@ -280,7 +280,7 @@ public final class CategoryAorticValve extends CategoryComponent {
                 }
                 
                 setHashCategoryReport();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
         
@@ -300,7 +300,7 @@ public final class CategoryAorticValve extends CategoryComponent {
                     
                     editButtonMaxGradient.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     editButtonMaxGradient.setEnabled(true);
@@ -325,7 +325,7 @@ public final class CategoryAorticValve extends CategoryComponent {
                     
                     editButtonMidGradient.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     editButtonMidGradient.setEnabled(true);
@@ -351,7 +351,7 @@ public final class CategoryAorticValve extends CategoryComponent {
                     
                     editButtonRaphe.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     editButtonRaphe.setEnabled(true);
@@ -376,7 +376,7 @@ public final class CategoryAorticValve extends CategoryComponent {
                     
                     editButtonValveArea.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     editButtonValveArea.setEnabled(true);
@@ -401,7 +401,7 @@ public final class CategoryAorticValve extends CategoryComponent {
                     
                     editButtonIndexDoppler.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     editButtonIndexDoppler.setEnabled(true);
@@ -426,7 +426,7 @@ public final class CategoryAorticValve extends CategoryComponent {
                     
                     editButtonTacTe.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     editButtonTacTe.setEnabled(true);
@@ -451,7 +451,7 @@ public final class CategoryAorticValve extends CategoryComponent {
                     
                     editButtonOrifice.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     editButtonOrifice.setEnabled(true);
@@ -495,7 +495,7 @@ public final class CategoryAorticValve extends CategoryComponent {
         }  
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
     }
     
     private void fillFormMidGradient() {
@@ -532,7 +532,7 @@ public final class CategoryAorticValve extends CategoryComponent {
         }   
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
     }
     
     private void fillFormRaphe() {
@@ -575,7 +575,7 @@ public final class CategoryAorticValve extends CategoryComponent {
         }   
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
     }
     
     private void fillFormValveArea() {
@@ -620,7 +620,7 @@ public final class CategoryAorticValve extends CategoryComponent {
         }   
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
     }
     
     private void fillFormIndexDoppler() {
@@ -657,7 +657,7 @@ public final class CategoryAorticValve extends CategoryComponent {
         }  
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
     }
     
     private void fillFormTacTe() {
@@ -694,7 +694,7 @@ public final class CategoryAorticValve extends CategoryComponent {
         }   
 
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
     }
     
     private void fillFormOrifice() {
@@ -731,7 +731,7 @@ public final class CategoryAorticValve extends CategoryComponent {
         }   
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
     }
     
     @Override
@@ -758,6 +758,11 @@ public final class CategoryAorticValve extends CategoryComponent {
         hashCategoryReport.put("Discreto", "");
         hashCategoryReport.put("Moderado", "");
         hashCategoryReport.put("Importante", "");
+        hashCategoryReport.put("Reduzida em grau discreto", "");
+        hashCategoryReport.put("Reduzida em grau moderado", "");
+        hashCategoryReport.put("Reduzida em grau importante", "");
+        hashCategoryReport.put("Reduzida em grau não significativo", "");
+        hashCategoryReport.put("Reduzida em grau significativo", "");
         hashCategoryReport.put("<html>Rafe das Válvulas - <b>DEFINIR</b></html>", "");
         hashCategoryReport.put("<html>Gradiente máximo - <b>DEFINIR</b></html>", "Gradiente máximo: " + maxGradient + " mmHg. ");
         hashCategoryReport.put("<html>Gradiente médio - <b>DEFINIR</b></html>", "Gradiente médio: " + midGradient + " mmHg. ");

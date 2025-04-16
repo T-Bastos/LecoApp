@@ -72,7 +72,7 @@ public final class CategoryIVC extends CategoryComponent {
                     
                     editButtonModel.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     editButtonModel.setEnabled(true);
@@ -87,7 +87,7 @@ public final class CategoryIVC extends CategoryComponent {
                 
                 checkResetButton();
                 setHashCategoryReport();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
     }
@@ -126,7 +126,7 @@ public final class CategoryIVC extends CategoryComponent {
         }   
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
     }
     
     @Override

@@ -13,7 +13,7 @@ import javax.swing.JComboBox;
  */
 public class JComboBoxSubcategory extends JComboBox {
     
-    private final int X_COMBOBOX = 330;
+    private final int X_COMBOBOX = 300;
     private final int Y_COMBOBOX = 20;
     
     public JComboBoxSubcategory(String[] options) {

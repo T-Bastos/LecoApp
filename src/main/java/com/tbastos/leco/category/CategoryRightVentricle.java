@@ -110,7 +110,7 @@ public final class CategoryRightVentricle extends CategoryComponent {
                     
                     editButtonTapse.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     editButtonTapse.setEnabled(true);
@@ -135,7 +135,7 @@ public final class CategoryRightVentricle extends CategoryComponent {
                     
                     editButtonS.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     editButtonS.setEnabled(true);
@@ -160,7 +160,7 @@ public final class CategoryRightVentricle extends CategoryComponent {
                     
                     editButtonFac.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     editButtonFac.setEnabled(true);
@@ -185,7 +185,7 @@ public final class CategoryRightVentricle extends CategoryComponent {
                     
                     editButtonDiamet.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     editButtonDiamet.setEnabled(true);
@@ -200,7 +200,7 @@ public final class CategoryRightVentricle extends CategoryComponent {
             if(e.getStateChange() == ItemEvent.SELECTED) {
                 
                 checkResetButton();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
         
@@ -209,7 +209,7 @@ public final class CategoryRightVentricle extends CategoryComponent {
             if(e.getStateChange() == ItemEvent.SELECTED) {
                 
                 checkResetButton();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
     }
@@ -248,7 +248,7 @@ public final class CategoryRightVentricle extends CategoryComponent {
         }  
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
     }
     
     private void fillFormFac() {
@@ -285,7 +285,7 @@ public final class CategoryRightVentricle extends CategoryComponent {
         }  
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
     }
     
     private void fillFormTapse() {
@@ -322,7 +322,7 @@ public final class CategoryRightVentricle extends CategoryComponent {
         }  
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
     }
     
     private void fillFormDiamet() {
@@ -359,7 +359,7 @@ public final class CategoryRightVentricle extends CategoryComponent {
         }   
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
     }
     
     @Override
@@ -411,7 +411,7 @@ public final class CategoryRightVentricle extends CategoryComponent {
             diamet = field4.getText();
             
             setHashCategoryReport();
-            Report.getReport().getAndUpdateReportPane();
+            Report.getReport().updateReportPane();
         }       
     }
     

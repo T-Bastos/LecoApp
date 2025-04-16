@@ -10,7 +10,6 @@ import com.tbastos.leco.category.CategoryComponent;
 import com.tbastos.leco.selectionui.JScrollSelection;
 import com.tbastos.leco.selectionui.JScrollTextPane;
 import com.tbastos.leco.utility.Report;
-import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,25 +32,15 @@ public class LecoUI {
             Logger.getLogger(LecoUI.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        UIManager.put("OptionPane.noButtonText", "Não");
-        UIManager.put("OptionPane.yesButtonText", "Sim");
-        UIManager.put("OptionPane.cancelButtonText", "Cancelar");
-        UIManager.put("FileChooser.openDialogTitleText", "Abrir");
-        UIManager.put("FileChooser.saveDialogTitleText", "Salvar");
-        UIManager.put("FileChooser.cancelButtonText", "Cancelar");
-        UIManager.put("FileChooser.openButtonText", "Abrir");
-        UIManager.put("FileChooser.saveButtonText", "Salvar");
-        UIManager.put("FileChooser.lookInLabelText", "Procurar em");
-        UIManager.put("FileChooser.fileNameLabelText", "Nome do arquivo");
-        UIManager.put("FileChooser.filesOfTypeLabelText", "Tipo de arquivo");
+        initLang();
         
         JMainFrame jMainFrame = new JMainFrame();
         
         JPanelSelection jPanelSelection = new JPanelSelection();
         JScrollSelection jScrollSelection = new JScrollSelection(jPanelSelection);
         jMainFrame.add(jScrollSelection);
-        
-        JScrollTextPane jScrollTextPane = new JScrollTextPane(Report.getReport().getAndUpdateReportPane());
+        Report.getReport().updateReportPane();
+        JScrollTextPane jScrollTextPane = new JScrollTextPane(Report.getReport().getReportPane());
         jMainFrame.add(jScrollTextPane);
         
         Iterator<CategoryComponent> iterator = Report.getReport().getReportCategories().iterator();
@@ -65,4 +54,18 @@ public class LecoUI {
         jMainFrame.setVisible(true);
     }
     
+    public void initLang() {
+        
+        UIManager.put("OptionPane.noButtonText", "Não");
+        UIManager.put("OptionPane.yesButtonText", "Sim");
+        UIManager.put("OptionPane.cancelButtonText", "Cancelar");
+        UIManager.put("FileChooser.openDialogTitleText", "Abrir");
+        UIManager.put("FileChooser.saveDialogTitleText", "Salvar");
+        UIManager.put("FileChooser.cancelButtonText", "Cancelar");
+        UIManager.put("FileChooser.openButtonText", "Abrir");
+        UIManager.put("FileChooser.saveButtonText", "Salvar");
+        UIManager.put("FileChooser.lookInLabelText", "Procurar em");
+        UIManager.put("FileChooser.fileNameLabelText", "Nome do arquivo");
+        UIManager.put("FileChooser.filesOfTypeLabelText", "Tipo de arquivo");
+    }
 }

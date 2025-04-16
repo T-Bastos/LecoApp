@@ -89,76 +89,62 @@ public class Report {
         return categories;
     }
     
-    public JTextPane getAndUpdateReportPane() {
+    public JTextPane getReportPane() {
+        
+        return this.reportPane;
+    }
+    
+    public JTextPane updateReportPane() {
         
         try {
             
             reportPane.setDocument(new DefaultStyledDocument());
             StyledDocument doc = reportPane.getStyledDocument();
-            
+
             Style styleParagraph = doc.addStyle("Paragraph", null);
             StyleConstants.setAlignment(styleParagraph, StyleConstants.ALIGN_JUSTIFIED);
             StyleConstants.setSpaceAbove(styleParagraph, 1);
             doc.setLogicalStyle(0, styleParagraph);
-            
+
             Style styleBold12 = doc.addStyle("BoldSize12", styleParagraph);
             StyleConstants.setBold(styleBold12, true);
             StyleConstants.setFontFamily(styleBold12, UIManager.getFont("Label.font").getFamily());
             StyleConstants.setFontSize(styleBold12, 12);
-            
+
             Style style12 = doc.addStyle("Size12", styleParagraph);
             StyleConstants.setFontFamily(style12, UIManager.getFont("Label.font").getFamily());
             StyleConstants.setFontSize(style12, 12);
-            
+
             Style styleBold18 = doc.addStyle("BoldSize18", styleParagraph);
             StyleConstants.setFontFamily(styleBold18, UIManager.getFont("Label.font").getFamily());
             StyleConstants.setBold(styleBold18, true);
             StyleConstants.setFontSize(styleBold18, 18);
             
-            doc.insertString(doc.getLength(), "COMENTÁRIOS:\n", styleBold18);
+            doc.insertString(doc.getLength(), "COMENTÁRIOS:\n", doc.getStyle("BoldSize18"));
             
             Iterator<CategoryComponent> iteratorCategory = report.getReportCategories().iterator();
             int i = 0;
-            //String[] categoryTextSplitXXX;
             CategoryComponent category;
             
             while(iteratorCategory.hasNext() && i < Report.getReport().getReportCategories().size() - 1) {
                 
-                category = iteratorCategory.next();  
-                
-                doc.insertString(doc.getLength(), Integer.toString(i + 1) + ". ", style12);
-                doc.insertString(doc.getLength(), category.getCategoryTitle() + ": ", styleBold12);
-                
-                /*if(category.getCategoryText().contains("XXX")) {
-                 
-                    categoryTextSplitXXX = category.getCategoryText().split("XXX");
-                
-                    for(int j = 0; j < categoryTextSplitXXX.length; j++) {
-
-                        doc.insertString(doc.getLength(), categoryTextSplitXXX[j], style12);
-                        if(j < categoryTextSplitXXX.length - 1) {
-                            
-                            doc.insertString(doc.getLength(), "XXX", styleBold12);
-                        }
-                    }
-                } else {*/
-                    
-                    doc.insertString(doc.getLength(), category.getCategoryText(), style12);
-                //}
-                
+                category = iteratorCategory.next();                  
+                doc.insertString(doc.getLength(), Integer.toString(i + 1) + ". ", doc.getStyle("Size12"));
+                doc.insertString(doc.getLength(), category.getCategoryTitle() + ": ", doc.getStyle("BoldSize12"));
+                doc.insertString(doc.getLength(), category.getCategoryText(), doc.getStyle("Size12"));
                 doc.insertString(doc.getLength(), "\n", null);
                 i++;
             }
             
             category = iteratorCategory.next(); 
             
-            doc.insertString(doc.getLength(), "\nCONCLUSÃO :\n", styleBold18);
+            doc.insertString(doc.getLength(), "\nCONCLUSÃO :\n", doc.getStyle("BoldSize18"));
             
             Iterator<String> iteratorCategoryConclusion = category.getCategoryTextArray().iterator();
             
             while(iteratorCategoryConclusion.hasNext()) {
 
-                doc.insertString(doc.getLength(), "- " + iteratorCategoryConclusion.next() + "\n", style12);
+                doc.insertString(doc.getLength(), "- " + iteratorCategoryConclusion.next() + "\n", doc.getStyle("Size12"));
             }
             
             

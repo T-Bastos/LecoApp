@@ -66,7 +66,7 @@ public final class CategoryLeftVentricle extends CategoryComponent {
         arrayEditButton.add(editButtonDysAneu);
         
         jLabelSubcategories.add(new JLabelSubcategory("Função distólica")); 
-        comboBoxDys = new JComboBoxSubcategory(new String[]{"", "VE normal, ao DT", "Sem sinais de aumento - VE", "Padrão de alteração do relaxamento", "DD - VE grau I", "DD - VE grau II", "DD - VE grau III(restritivo)", "Sinais de aumento - PD2VE", "VE não avaliada por arritmia", "VE não avaliada - Marcapasso"});
+        comboBoxDys = new JComboBoxSubcategory(new String[]{"", "VE normal, ao DT", "Sem sinais de aumento - VE", "Padrão de alteração do relaxamento", "DD - VE grau I", "DD - VE grau II", "DD - VE grau III(restritivo)", "Sinais de aumento - PD2VE", "VE não avaliada por arritmia", "VE não avaliada - Marcapasso", "VE não avaliada - Valvopatia mitral", "VE não avaliada - Fusão das ondas E e A"});
         jComboBoxSubcategories.add(comboBoxDys);
         
         jLabelSubcategories.add(new JLabelSubcategory("Movimento assincrônico SIV")); 
@@ -105,7 +105,7 @@ public final class CategoryLeftVentricle extends CategoryComponent {
                     
                     editButtonSys.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     editButtonSys.setEnabled(true);
@@ -130,7 +130,7 @@ public final class CategoryLeftVentricle extends CategoryComponent {
                     
                     editButtonDysAneu.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     editButtonDysAneu.setEnabled(true);
@@ -155,7 +155,7 @@ public final class CategoryLeftVentricle extends CategoryComponent {
                     
                     editButtonStrain.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     editButtonStrain.setEnabled(true);
@@ -169,7 +169,7 @@ public final class CategoryLeftVentricle extends CategoryComponent {
             if(e.getStateChange() == ItemEvent.SELECTED) {
                 
                 checkResetButton();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
         
@@ -178,7 +178,7 @@ public final class CategoryLeftVentricle extends CategoryComponent {
             if(e.getStateChange() == ItemEvent.SELECTED) {
                 
                 checkResetButton();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
         
@@ -187,7 +187,7 @@ public final class CategoryLeftVentricle extends CategoryComponent {
             if(e.getStateChange() == ItemEvent.SELECTED) {
                 
                 checkResetButton();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
     }
@@ -226,7 +226,7 @@ public final class CategoryLeftVentricle extends CategoryComponent {
         }   
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
     }
     
     private void fillFormDysAneu() {
@@ -280,7 +280,7 @@ public final class CategoryLeftVentricle extends CategoryComponent {
         }   
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
     }
     
     private void fillFormSys() {
@@ -322,7 +322,7 @@ public final class CategoryLeftVentricle extends CategoryComponent {
         }   
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
     }
     
     @Override
@@ -360,6 +360,8 @@ public final class CategoryLeftVentricle extends CategoryComponent {
         hashCategoryReport.put("VE não avaliada - Marcapasso", "Função diastólica do VE não avaliada devido a ritmo de marcapasso. ");
         hashCategoryReport.put("VE não avaliada - Valvopatia mitral", "Função diastólica do VE não avaliada devido à presença de valvopatia mitral. ");
         hashCategoryReport.put("VE não avaliada - fusão das E e A", "Função diastólica do VE não avaliada devido à fusão das ondas E e A. ");
+        hashCategoryReport.put("VE não avaliada - Valvopatia mitral", "Função diastólica do VE não avaliada devido à valvopatia mitral. ");
+        hashCategoryReport.put("VE não avaliada - Fusão das ondas E e A", "Função diastólica do VE não avaliada devido à fusão das ondas E e A. ");
         hashCategoryReport.put("Presente", "Presença de movimento assincrônico do septo interventricular. ");
         hashCategoryReport.put("<html>Com Strain - <b>DEFINIR</b></html>", "Análise da deformação miocárdica do ventrículo esquerdo pela técnica do speckle tracking evidenciou strain global longitudinal com valor absoluto estimado em " + strain + "% (VR \u2265 18%). ");
     }         

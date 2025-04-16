@@ -73,7 +73,7 @@ public final class CategoryAtrialSeptum extends CategoryComponent {
                     
                     editButtonModel.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     editButtonModel.setEnabled(true);
@@ -88,7 +88,7 @@ public final class CategoryAtrialSeptum extends CategoryComponent {
                 
                 checkResetButton();
                 setHashCategoryReport();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
     }
@@ -132,7 +132,7 @@ public final class CategoryAtrialSeptum extends CategoryComponent {
         }   
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
     }
     
     @Override

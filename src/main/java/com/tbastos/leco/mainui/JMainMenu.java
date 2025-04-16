@@ -14,6 +14,8 @@ import java.awt.print.PrinterException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JMenu;
@@ -56,11 +58,28 @@ public class JMainMenu extends JMenuBar{
 
     private void printReport() {
         
+        String[] reportCategoryTitle = new String[Report.getReport().getReportCategories().size() - 1];
+        String[] reportCategoryText = new String[Report.getReport().getReportCategories().size() - 1];
+                 
+        Iterator<CategoryComponent> iteratorCategory = Report.getReport().getReportCategories().iterator();
+        CategoryComponent category;
+        int i = 0;
+        
+        while(iteratorCategory.hasNext() && i < Report.getReport().getReportCategories().size() - 1) {
+
+            category = iteratorCategory.next();
+            reportCategoryTitle[i] = category.getCategoryTitle();
+            reportCategoryText[i] = category.getCategoryText();
+            i++;
+        }
+        
+        ArrayList<String> categoryConclusionText = iteratorCategory.next().getCategoryTextArray();
+        
         try {
             
             ReportWriter writer = new ReportWriter();
-            writer.reportWriterPrint(Report.getReport().getAndUpdateReportPane());
-        } catch (PrinterException ex) {
+            writer.reportWriterPrint(reportCategoryTitle, reportCategoryText, categoryConclusionText);
+        } catch (PrinterException | DocumentException | IOException ex) {
             
             JOptionPane.showMessageDialog(jMenuItemPrint, "Erro ao tentar imprimir, tente novamente", "Erro de impressão", JOptionPane.ERROR_MESSAGE);
         }
@@ -97,7 +116,7 @@ public class JMainMenu extends JMenuBar{
                 category.setNormalComboBoxes();
             }
             
-            Report.getReport().getAndUpdateReportPane();
+            Report.getReport().updateReportPane();
         }
     }
     

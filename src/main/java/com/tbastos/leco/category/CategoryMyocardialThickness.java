@@ -94,7 +94,7 @@ public final class CategoryMyocardialThickness extends CategoryComponent {
                     
                     editButtonMassEsp.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     editButtonMassEsp.setEnabled(true);
@@ -119,7 +119,7 @@ public final class CategoryMyocardialThickness extends CategoryComponent {
                     
                     editButtonDisease.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     editButtonDisease.setEnabled(true);
@@ -134,7 +134,7 @@ public final class CategoryMyocardialThickness extends CategoryComponent {
             if(e.getStateChange() == ItemEvent.SELECTED) {
                 
                 checkResetButton();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
         
@@ -143,7 +143,7 @@ public final class CategoryMyocardialThickness extends CategoryComponent {
             if(e.getStateChange() == ItemEvent.SELECTED) {
                 
                 checkResetButton();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
         
@@ -152,7 +152,7 @@ public final class CategoryMyocardialThickness extends CategoryComponent {
             if(e.getStateChange() == ItemEvent.SELECTED) {
                 
                 checkResetButton();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
     }
@@ -196,7 +196,7 @@ public final class CategoryMyocardialThickness extends CategoryComponent {
         }   
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
     }
     
     private void fillFormDisease() {
@@ -241,7 +241,7 @@ public final class CategoryMyocardialThickness extends CategoryComponent {
         }   
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
     }
     
     @Override

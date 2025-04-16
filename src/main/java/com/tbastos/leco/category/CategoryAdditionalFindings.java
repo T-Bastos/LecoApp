@@ -87,7 +87,7 @@ public final class CategoryAdditionalFindings extends CategoryComponent {
     
     @Override
     protected void setCategoryListeners() {
-       
+        
         editButtonIntracavitaryThrombus.addActionListener((ActionEvent e) -> {
             
             fillFormIntracavitaryThrombus();
@@ -105,7 +105,7 @@ public final class CategoryAdditionalFindings extends CategoryComponent {
                     
                     editButtonIntracavitaryThrombus.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     editButtonIntracavitaryThrombus.setEnabled(true);
@@ -131,7 +131,7 @@ public final class CategoryAdditionalFindings extends CategoryComponent {
                     
                     editButtonVegetation.setEnabled(false);
                     setHashCategoryReport();
-                    Report.getReport().getAndUpdateReportPane();
+                    Report.getReport().updateReportPane();
                 } else {
                     
                     editButtonVegetation.setEnabled(true);
@@ -146,7 +146,7 @@ public final class CategoryAdditionalFindings extends CategoryComponent {
                 
                 checkResetButton();
                 setHashCategoryReport();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
         
@@ -156,7 +156,7 @@ public final class CategoryAdditionalFindings extends CategoryComponent {
                 
                 checkResetButton();
                 setHashCategoryReport();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
         
@@ -165,7 +165,7 @@ public final class CategoryAdditionalFindings extends CategoryComponent {
                 
                 checkResetButton();
                 setHashCategoryReport();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
         
@@ -175,7 +175,7 @@ public final class CategoryAdditionalFindings extends CategoryComponent {
                 
                 checkResetButton();
                 setHashCategoryReport();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
         
@@ -185,7 +185,7 @@ public final class CategoryAdditionalFindings extends CategoryComponent {
                 
                 checkResetButton();
                 setHashCategoryReport();
-                Report.getReport().getAndUpdateReportPane();
+                Report.getReport().updateReportPane();
             }
         });
     }
@@ -229,7 +229,7 @@ public final class CategoryAdditionalFindings extends CategoryComponent {
         }   
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
     }
     
     private void fillFormVegetation() {
@@ -271,7 +271,7 @@ public final class CategoryAdditionalFindings extends CategoryComponent {
         }   
         
         setHashCategoryReport();
-        Report.getReport().getAndUpdateReportPane();
+        Report.getReport().updateReportPane();
     }
     
     @Override

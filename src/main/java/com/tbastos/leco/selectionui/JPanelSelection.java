@@ -6,7 +6,6 @@ package com.tbastos.leco.selectionui;
 
 import com.tbastos.leco.category.CategoryComponent;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.util.Iterator;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -30,8 +29,9 @@ public class JPanelSelection extends JPanel{
     
     public void addCategory(CategoryComponent category) {
         
-        add(category.getResetButton(), "split 2");
-        add(category.getJLabelCategory());
+        add(category.getJLabelCategory(), "split 3");
+        add(category.getResetButton());
+        add(category.getNormalButton());
         add(new JLabel());
         add(new JLabel());
         Iterator<JLabelSubcategory> iteratorL = category.getJLabelSubcategories().iterator();

@@ -65,7 +65,7 @@ public final class CategoryTricuspidValve extends CategoryComponent {
         comboBoxThickening.setEnabled(false);
         jComboBoxSubcategories.add(comboBoxThickening);
         
-        jLabelSubcategories.add(new JLabelSubcategory("Deslocamento apical"));
+        jLabelSubcategories.add(new JLabelSubcategory("Ebstein - medida"));
         comboBoxDisp = new JComboBoxSubcategory(new String[]{"", "<html>Deslocamento - <b>DEFINIR</b></html>"});
         comboBoxDisp.setName("Disp");
         comboBoxDisp.setEnabled(false);
@@ -394,7 +394,7 @@ public final class CategoryTricuspidValve extends CategoryComponent {
         field1.setText(disp);
 
         Object[] input = new Object[2];
-        input[0] = "Deslocamento(mm):";
+        input[0] = "Deslocamento apical da cúspide septal(mm):";
         input[1] = field1;
 
         JOptionPane optionPane = new JOptionPane(

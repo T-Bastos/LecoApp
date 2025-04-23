@@ -43,6 +43,10 @@ public final class CategoryLeftAtrium extends CategoryComponent {
         editButtonSize.setName("Size");
         arrayEditButton.add(editButtonSize);
         
+        JLabelSubcategory notes = new JLabelSubcategory("Notas adicionais");
+        notes.setName("Notes");
+        jLabelSubcategories.add(notes);
+        
         setHashCategoryReport();
         setCategoryListeners();
     }

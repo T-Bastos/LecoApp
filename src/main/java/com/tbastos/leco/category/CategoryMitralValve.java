@@ -43,6 +43,7 @@ public final class CategoryMitralValve extends CategoryComponent {
     private String mobilityWilkins = "XXX";
     private String calcificationWilkins = "XXX";
     private String subvalveWilkins = "XXX";
+    private String indexDoppler = "XXX";
     private final JComboBoxSubcategory comboBoxModel;
     private final JComboBoxSubcategory comboBoxThickening;
     private final JComboBoxSubcategory comboBoxCalcification;
@@ -54,11 +55,13 @@ public final class CategoryMitralValve extends CategoryComponent {
     private final JComboBoxSubcategory comboBoxValveArea;
     private final JComboBoxSubcategory comboBoxOrifice;
     private final JComboBoxSubcategory comboBoxWilkins;
+    private final JComboBoxSubcategory comboBoxIndexDoppler;
     private final JEditButton editButtonGradient;
     private final JEditButton editButtonPht;
     private final JEditButton editButtonValveArea;
     private final JEditButton editButtonOrifice;
     private final JEditButton editButtonWilkins;
+    private final JEditButton editButtonIndexDoppler;
     
     public CategoryMitralValve() {
           
@@ -128,6 +131,14 @@ public final class CategoryMitralValve extends CategoryComponent {
         editButtonPht.setName("Pht");
         arrayEditButton.add(editButtonPht);
         
+        jLabelSubcategories.add(new JLabelSubcategory("Índice Doppler")); 
+        comboBoxIndexDoppler = new JComboBoxSubcategory(new String[]{"", "<html>Índice Doppler - <b>DEFINIR</b></html>"});
+        comboBoxIndexDoppler.setName("IndexDoppler");
+        jComboBoxSubcategories.add(comboBoxIndexDoppler);
+        editButtonIndexDoppler = new JEditButton();
+        editButtonIndexDoppler.setName("IndexDoppler");
+        arrayEditButton.add(editButtonIndexDoppler);
+        
         jLabelSubcategories.add(new JLabelSubcategory("Área valvar")); 
         comboBoxValveArea = new JComboBoxSubcategory(new String[]{"", "<html>Equação de continuidade - <b>DEFINIR</b></html>", "<html>Planimetria - <b>DEFINIR</b></html>"});
         comboBoxValveArea.setName("ValveArea");
@@ -136,12 +147,21 @@ public final class CategoryMitralValve extends CategoryComponent {
         editButtonValveArea.setName("ValveArea");
         arrayEditButton.add(editButtonValveArea);
         
+        JLabelSubcategory notes = new JLabelSubcategory("Notas adicionais");
+        notes.setName("Notes");
+        jLabelSubcategories.add(notes);
+        
         setHashCategoryReport();
         setCategoryListeners();
     }
     
     @Override
     protected void setCategoryListeners() {
+        
+        editButtonIndexDoppler.addActionListener((ActionEvent e) -> {
+            
+            fillFormIndexDoppler();
+        });
         
         editButtonWilkins.addActionListener((ActionEvent e) -> {
             
@@ -200,6 +220,26 @@ public final class CategoryMitralValve extends CategoryComponent {
         editButtonPht.addActionListener((ActionEvent e) -> {
             
             fillFormPht();
+        });
+        
+        comboBoxIndexDoppler.addItemListener((ItemEvent e) -> {
+            
+            if(e.getStateChange() == ItemEvent.SELECTED) {
+                
+                checkResetButton();
+                indexDoppler = "XXX";
+                
+                if(comboBoxIndexDoppler.getSelectedIndex() == 0) {
+                    
+                    editButtonIndexDoppler.setEnabled(false);
+                    setHashCategoryReport();
+                    Report.getReport().updateReportPane();
+                } else {
+                    
+                    editButtonIndexDoppler.setEnabled(true);
+                    fillFormIndexDoppler();
+                }
+            }
         });
         
         comboBoxPht.addItemListener((ItemEvent e) -> {
@@ -537,6 +577,43 @@ public final class CategoryMitralValve extends CategoryComponent {
         Report.getReport().updateReportPane();
     }
     
+    private void fillFormIndexDoppler() {
+        
+        JTextField field1 = new JTextField(10);
+        field1.setText(indexDoppler);
+
+        Object[] input = new Object[2];
+        input[0] = "Índice Doppler:";
+        input[1] = field1;
+        
+        JOptionPane optionPane = new JOptionPane(
+                input,
+                JOptionPane.PLAIN_MESSAGE,
+                JOptionPane.OK_CANCEL_OPTION
+        );
+
+        JDialog dialog = optionPane.createDialog("Defina os parâmetros");
+
+        Timer timer = new Timer(100, (ActionEvent e) -> {
+            field1.requestFocusInWindow();
+        });
+        
+        timer.setRepeats(false);
+        timer.start();
+
+        dialog.setVisible(true);
+        
+        Object selectedValue = optionPane.getValue();
+        
+        if (selectedValue instanceof Integer && (Integer) selectedValue == JOptionPane.OK_OPTION) {
+
+            indexDoppler = field1.getText();
+        }  
+        
+        setHashCategoryReport();
+        Report.getReport().updateReportPane();
+    }
+    
     private void fillFormGradient() {
         
         JTextField field1 = new JTextField(10);
@@ -739,6 +816,7 @@ public final class CategoryMitralValve extends CategoryComponent {
         hashCategoryReport.put("<html>Planimetria - <b>DEFINIR</b></html>", "Área valvar: " + valveArea + " cm² (planimetria). ");
         hashCategoryReport.put("<html>Orifício - <b>DEFINIR</b></html>", "Orifício efetivo regurgitante estimado em " + orifice + " cm². ");
         hashCategoryReport.put("<html>Escore de Wilkins - <b>DEFINIR</b></html>", "Escore de Wilkins: " + wilkins + " (espessura - " + thickeningWilkins + "; mobilidade - " + mobilityWilkins + "; calcificação - " + calcificationWilkins + "; subvalvar - " + subvalveWilkins +"). ");
+        hashCategoryReport.put("<html>Índice Doppler - <b>DEFINIR</b></html>", "Índice Doppler: " + indexDoppler + " (sugestivo de obstrução significativa se < 2,5). ");
     }
 
     @Override

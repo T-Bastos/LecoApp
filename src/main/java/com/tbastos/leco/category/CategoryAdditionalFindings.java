@@ -81,6 +81,10 @@ public final class CategoryAdditionalFindings extends CategoryComponent {
         comboBoxRac = new JComboBoxSubcategory(new String[]{"", "Presente"});
         jComboBoxSubcategories.add(comboBoxRac);
         
+        JLabelSubcategory notes = new JLabelSubcategory("Notas adicionais");
+        notes.setName("Notes");
+        jLabelSubcategories.add(notes);
+        
         setHashCategoryReport();
         setCategoryListeners();
     }

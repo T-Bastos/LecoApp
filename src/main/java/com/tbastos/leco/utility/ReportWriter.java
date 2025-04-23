@@ -129,17 +129,6 @@ public class ReportWriter {
         }
         
         document.close();   
-        
-             try (PDDocument documentPDF = PDDocument.load(pdfFile)) {
-                PrinterJob job = PrinterJob.getPrinterJob();
-                job.setPageable(new PDFPageable(documentPDF));
-
-                if (job.printDialog()) {
-                    job.print();
-                }
-            } catch (PrinterException ex) {
-            Logger.getLogger(ReportWriter.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
     
     public void reportWriterDocx(String[] reportCategoryTitle, String[] reportCategoryText, ArrayList<String> reportCategoryConclusion) throws FileNotFoundException, IOException {

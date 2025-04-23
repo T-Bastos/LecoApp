@@ -18,7 +18,7 @@ import net.miginfocom.swing.MigLayout;
 public class JPanelSelection extends JPanel{
 
     private final int X_PANEL1 = 450;
-    private final int Y_PANEL1 = 3900;
+    private final int Y_PANEL1 = 5650;
     
     public JPanelSelection() {
         
@@ -32,15 +32,15 @@ public class JPanelSelection extends JPanel{
         add(category.getJLabelCategory(), "split 3");
         add(category.getResetButton());
         add(category.getNormalButton());
-        add(new JLabel());
-        add(new JLabel());
+        add(new JLabel(), "span 2");
         Iterator<JLabelSubcategory> iteratorL = category.getJLabelSubcategories().iterator();
         Iterator<JComboBoxSubcategory> iteratorCB = category.getJComboBoxSubcategories().iterator();
         JComboBoxSubcategory comboBox;
         
-        while(iteratorL.hasNext()) {
+        while(iteratorL.hasNext() && iteratorCB.hasNext()) {
             
-            add(iteratorL.next());
+            JLabelSubcategory label = iteratorL.next();
+            add(label);
             comboBox = iteratorCB.next();
             add(comboBox, "h pref!, w pref!");      
             if(comboBox.getName() != null) {
@@ -51,5 +51,9 @@ public class JPanelSelection extends JPanel{
                 add(new JLabel());
             }
         }
+        
+        add(new JLabel());
+        add(category.getCategoryTextArea().getParent(), "h 60!, growx");
+        add(new JLabel());
     }
 }

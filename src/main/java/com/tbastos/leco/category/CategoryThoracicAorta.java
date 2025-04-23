@@ -35,6 +35,10 @@ public final class CategoryThoracicAorta extends CategoryComponent {
         comboBoxAtheroma = new JComboBoxSubcategory(new String[]{"", "Ateroma em aorta ascendente", "Ateroma em arco aórtico", "Ateroma em aorta descendente", "Irregularidades parietais em aorta descendente"});
         jComboBoxSubcategories.add(comboBoxAtheroma);
         
+        JLabelSubcategory notes = new JLabelSubcategory("Notas adicionais");
+        notes.setName("Notes");
+        jLabelSubcategories.add(notes);
+        
         setHashCategoryReport();
         setCategoryListeners();
     }

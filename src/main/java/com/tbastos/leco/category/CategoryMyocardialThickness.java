@@ -70,6 +70,10 @@ public final class CategoryMyocardialThickness extends CategoryComponent {
         editButtonDisease.setName("Disease");
         arrayEditButton.add(editButtonDisease);
         
+        JLabelSubcategory notes = new JLabelSubcategory("Notas adicionais");
+        notes.setName("Notes");
+        jLabelSubcategories.add(notes);
+        
         setHashCategoryReport();
         setCategoryListeners();
     }

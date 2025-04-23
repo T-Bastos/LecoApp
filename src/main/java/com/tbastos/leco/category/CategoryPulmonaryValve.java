@@ -109,6 +109,10 @@ public final class CategoryPulmonaryValve extends CategoryComponent {
         editButtonValveArea.setName("ValveArea");
         arrayEditButton.add(editButtonValveArea);
         
+        JLabelSubcategory notes = new JLabelSubcategory("Notas adicionais");
+        notes.setName("Notes");
+        jLabelSubcategories.add(notes);
+        
         setHashCategoryReport();
         setCategoryListeners();
     }

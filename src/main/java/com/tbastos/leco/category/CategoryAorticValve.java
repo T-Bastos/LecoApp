@@ -144,6 +144,10 @@ public final class CategoryAorticValve extends CategoryComponent {
         editButtonTacTe.setName("TacTe");
         arrayEditButton.add(editButtonTacTe);
         
+        JLabelSubcategory notes = new JLabelSubcategory("Notas adicionais");
+        notes.setName("Notes");
+        jLabelSubcategories.add(notes);
+        
         setHashCategoryReport();  
         setCategoryListeners();
     }

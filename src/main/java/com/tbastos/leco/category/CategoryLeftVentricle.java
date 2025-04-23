@@ -81,6 +81,10 @@ public final class CategoryLeftVentricle extends CategoryComponent {
         editButtonStrain.setName("Strain");
         arrayEditButton.add(editButtonStrain);
         
+        JLabelSubcategory notes = new JLabelSubcategory("Notas adicionais");
+        notes.setName("Notes");
+        jLabelSubcategories.add(notes);
+        
         setHashCategoryReport();
         setCategoryListeners();
     }

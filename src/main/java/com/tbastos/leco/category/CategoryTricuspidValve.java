@@ -33,6 +33,7 @@ public final class CategoryTricuspidValve extends CategoryComponent {
     private String valveArea = "XXX";
     private String orifice = "XXX";
     private String disp = "XXX";
+    private String indexDoppler = "XXX";
     private final JComboBoxSubcategory comboBoxModel;
     private final JComboBoxSubcategory comboBoxThickening;
     private final JComboBoxSubcategory comboBoxCalcification;
@@ -43,11 +44,13 @@ public final class CategoryTricuspidValve extends CategoryComponent {
     private final JComboBoxSubcategory comboBoxValveArea;
     private final JComboBoxSubcategory comboBoxOrifice;
     private final JComboBoxSubcategory comboBoxDisp;
+    private final JComboBoxSubcategory comboBoxIndexDoppler;
     private final JEditButton editMidButtonGradient;
     private final JEditButton editButtonPht;
     private final JEditButton editButtonValveArea;
     private final JEditButton editButtonOrifice;
     private final JEditButton editButtonDisp;
+    private final JEditButton editButtonIndexDoppler;
     
     public CategoryTricuspidValve() {
         
@@ -113,6 +116,14 @@ public final class CategoryTricuspidValve extends CategoryComponent {
         editButtonPht.setName("Pht");
         arrayEditButton.add(editButtonPht);
         
+        jLabelSubcategories.add(new JLabelSubcategory("Índice Doppler")); 
+        comboBoxIndexDoppler = new JComboBoxSubcategory(new String[]{"", "<html>Índice Doppler - <b>DEFINIR</b></html>"});
+        comboBoxIndexDoppler.setName("IndexDoppler");
+        jComboBoxSubcategories.add(comboBoxIndexDoppler);
+        editButtonIndexDoppler = new JEditButton();
+        editButtonIndexDoppler.setName("IndexDoppler");
+        arrayEditButton.add(editButtonIndexDoppler);
+        
         jLabelSubcategories.add(new JLabelSubcategory("Área valvar")); 
         comboBoxValveArea = new JComboBoxSubcategory(new String[]{"", "<html>Equação de continuidade - <b>DEFINIR</b></html>", "<html>Planimetria - <b>DEFINIR</b></html>"});
         comboBoxValveArea.setName("ValveArea");
@@ -121,6 +132,10 @@ public final class CategoryTricuspidValve extends CategoryComponent {
         editButtonValveArea.setName("ValveArea");
         arrayEditButton.add(editButtonValveArea);
         
+        JLabelSubcategory notes = new JLabelSubcategory("Notas adicionais");
+        notes.setName("Notes");
+        jLabelSubcategories.add(notes);
+        
         setHashCategoryReport();
         setCategoryListeners();
     }
@@ -128,6 +143,11 @@ public final class CategoryTricuspidValve extends CategoryComponent {
     @Override
     protected void setCategoryListeners() {
          
+        editButtonIndexDoppler.addActionListener((ActionEvent e) -> {
+            
+            fillFormIndexDoppler();
+        });
+        
         editButtonDisp.addActionListener((ActionEvent e) -> {
             
             fillFormDisp();
@@ -152,6 +172,26 @@ public final class CategoryTricuspidValve extends CategoryComponent {
                 }
             }
         });  
+        
+        comboBoxIndexDoppler.addItemListener((ItemEvent e) -> {
+            
+            if(e.getStateChange() == ItemEvent.SELECTED) {
+                
+                checkResetButton();
+                indexDoppler = "XXX";
+                
+                if(comboBoxIndexDoppler.getSelectedIndex() == 0) {
+                    
+                    editButtonIndexDoppler.setEnabled(false);
+                    setHashCategoryReport();
+                    Report.getReport().updateReportPane();
+                } else {
+                    
+                    editButtonIndexDoppler.setEnabled(true);
+                    fillFormIndexDoppler();
+                }
+            }
+        });
         
         editMidButtonGradient.addActionListener((ActionEvent e) -> {
             
@@ -271,7 +311,7 @@ public final class CategoryTricuspidValve extends CategoryComponent {
                     jLabelCategory.setText("Valva tricúspide");
                 }
                 
-                if(selectedIndex == 1 || selectedIndex == 5 ||
+                if(selectedIndex == 1 || selectedIndex == 5 || selectedIndex == 4 ||
                         selectedIndex == 6) {
                     
                     comboBoxThickening.setEnabled(true);
@@ -298,16 +338,6 @@ public final class CategoryTricuspidValve extends CategoryComponent {
                     comboBoxMobility.setSelectedIndex(0);
                     comboBoxReflux.setEnabled(true);
                     comboBoxDisp.setEnabled(true);
-                } else if (selectedIndex == 4) {
-                    
-                    comboBoxThickening.setEnabled(true);
-                    comboBoxCalcification.setEnabled(false);
-                    comboBoxCalcification.setSelectedIndex(0);
-                    comboBoxMobility.setEnabled(false);
-                    comboBoxMobility.setSelectedIndex(0);
-                    comboBoxReflux.setEnabled(true);
-                    comboBoxDisp.setEnabled(false);
-                    comboBoxDisp.setSelectedIndex(0);
                 }
                 
                 setHashCategoryReport();
@@ -499,6 +529,43 @@ public final class CategoryTricuspidValve extends CategoryComponent {
         Report.getReport().updateReportPane();
     }
     
+    private void fillFormIndexDoppler() {
+        
+        JTextField field1 = new JTextField(10);
+        field1.setText(indexDoppler);
+
+        Object[] input = new Object[2];
+        input[0] = "Índice Doppler:";
+        input[1] = field1;
+        
+        JOptionPane optionPane = new JOptionPane(
+                input,
+                JOptionPane.PLAIN_MESSAGE,
+                JOptionPane.OK_CANCEL_OPTION
+        );
+
+        JDialog dialog = optionPane.createDialog("Defina os parâmetros");
+
+        Timer timer = new Timer(100, (ActionEvent e) -> {
+            field1.requestFocusInWindow();
+        });
+        
+        timer.setRepeats(false);
+        timer.start();
+
+        dialog.setVisible(true);
+        
+        Object selectedValue = optionPane.getValue();
+        
+        if (selectedValue instanceof Integer && (Integer) selectedValue == JOptionPane.OK_OPTION) {
+
+            indexDoppler = field1.getText();
+        }  
+        
+        setHashCategoryReport();
+        Report.getReport().updateReportPane();
+    }
+    
     private void fillFormValveArea() {
         
         JTextField field1 = new JTextField(10);
@@ -589,7 +656,7 @@ public final class CategoryTricuspidValve extends CategoryComponent {
         hashCategoryReport.put("Valva nativa habitual", "Com " + thickening + " e abertura " + mobility + ". Ao Doppler, refluxo " + reflux + ". ");
         hashCategoryReport.put("Degenerativa", "Com " + thickening + ", calcificação " + calcification + " e abertura " + mobility + ". Ao Doppler, refluxo " + reflux + ". ");
         hashCategoryReport.put("Anomalia de Ebstein", "Com " + thickening + " e deslocamento apical de cúspide septal da valva tricúspide de aproximadamente " + disp + " mm, associada a cúspide anterior alongada, gerando ocupação de parte do ventrículo direito pelo átrio direito. Achado compatível com Anomalia de Ebstein. Abertura valvar preservada e com refluxo de grau " + reflux + " ao Doppler. ");
-        hashCategoryReport.put("Síndrome carcinoide", "Com " + thickening + " e redução sistodiastólica da mobilidade de duas cúspides que ocasiona refluxo de grau " + reflux + " ao Doppler. Achados sugestivos de Síndrome Carcinoide. ");
+        hashCategoryReport.put("Síndrome carcinoide", "Com " + thickening + ", abertura " + mobility + " e redução sistodiastólica da mobilidade de duas cúspides que ocasiona refluxo de grau " + reflux + " ao Doppler. Achados sugestivos de Síndrome Carcinoide. ");
         hashCategoryReport.put("Prótese biológica - Tricúspide", "Normoposicionada, com " + thickening + " e mobilidade de seus elementos móveis " + mobility + ". Ao Doppler, refluxo " + reflux + ". ");
         hashCategoryReport.put("Prótese mecânica - Tricúspide", "Normoposicionada, com " + thickening + " e mobilidade de seus elementos móveis " + mobility + ". Ao Doppler, refluxo " + reflux + ".  ");
         hashCategoryReport.put("Ecotextura normal", "");
@@ -617,6 +684,7 @@ public final class CategoryTricuspidValve extends CategoryComponent {
         hashCategoryReport.put("<html>Equação de continuidade - <b>DEFINIR</b></html>", "Área valvar: " + valveArea + " cm² (equação de continuidade). ");
         hashCategoryReport.put("<html>Planimetria - <b>DEFINIR</b></html>", "Área valvar: " + valveArea + " cm² (planimetria). ");
         hashCategoryReport.put("<html>Orifício - <b>DEFINIR</b></html>", "Orifício efetivo regurgitante estimado em " + orifice + " cm². ");
+        hashCategoryReport.put("<html>Índice Doppler - <b>DEFINIR</b></html>", "Índice Doppler: " + indexDoppler + " (sugestivo de obstrução significativa se < 2,0). ");
     }      
     
     @Override

@@ -14,8 +14,6 @@ import java.awt.print.PrinterException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JMenu;
@@ -69,7 +67,13 @@ public class JMainMenu extends JMenuBar{
 
             category = iteratorCategory.next();
             reportCategoryTitle[i] = category.getCategoryTitle();
-            reportCategoryText[i] = category.getCategoryText();
+            if(category.getCategoryTextArea().getText().equals("Digite sua nota opcional aqui...")) {
+            
+                reportCategoryText[i] = category.getCategoryText();
+            } else {
+            
+                reportCategoryText[i] = category.getCategoryText() + " " + category.getCategoryTextArea().getText();
+            }
             i++;
         }
         
@@ -94,8 +98,10 @@ public class JMainMenu extends JMenuBar{
             Iterator<CategoryComponent> iterator = Report.getReport().getReportCategories().iterator();
             
             while(iterator.hasNext()) {
-            
-                iterator.next().setIndex0ComboBoxes();
+           
+                CategoryComponent category = iterator.next();
+                category.setIndex0ComboBoxes();
+                category.getCategoryTextArea().setText("");
             }
         }
     }
@@ -114,6 +120,7 @@ public class JMainMenu extends JMenuBar{
                 category = iterator.next();
                 category.setIndex0ComboBoxes();
                 category.setNormalComboBoxes();
+                category.getCategoryTextArea().setText("");
             }
             
             Report.getReport().updateReportPane();
@@ -133,7 +140,13 @@ public class JMainMenu extends JMenuBar{
 
             category = iteratorCategory.next();
             reportCategoryTitle[i] = category.getCategoryTitle();
-            reportCategoryText[i] = category.getCategoryText();
+            if(category.getCategoryTextArea().getText().equals("Digite sua nota opcional aqui...")) {
+            
+                reportCategoryText[i] = category.getCategoryText();
+            } else {
+            
+                reportCategoryText[i] = category.getCategoryText() + " " + category.getCategoryTextArea().getText();
+            }
             i++;
         }
         

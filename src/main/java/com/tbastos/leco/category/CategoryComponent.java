@@ -10,11 +10,22 @@ import com.tbastos.leco.selectionui.JLabelCategory;
 import com.tbastos.leco.selectionui.JLabelSubcategory;
 import com.tbastos.leco.selectionui.JNormalButton;
 import com.tbastos.leco.selectionui.JResetButton;
+import com.tbastos.leco.utility.Report;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.border.TitledBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /**
  *
@@ -29,6 +40,7 @@ public abstract class CategoryComponent {
     protected ArrayList<JEditButton> arrayEditButton = null;
     protected JResetButton resetButton = null;
     protected JNormalButton normalButton = null;
+    protected JTextArea textArea = null;
     
     public ArrayList<JLabelSubcategory> getJLabelSubcategories() {
         
@@ -77,6 +89,7 @@ public abstract class CategoryComponent {
                 if (choiceConfirm == JOptionPane.OK_OPTION) {
 
                     setIndex0ComboBoxes();   
+                    getCategoryTextArea().setText("");
                 }
             });
         }
@@ -84,7 +97,7 @@ public abstract class CategoryComponent {
         return this.resetButton; 
     }
     
-        public JNormalButton getNormalButton() {
+    public JNormalButton getNormalButton() {
         
         if(this.normalButton == null) { 
         
@@ -99,11 +112,70 @@ public abstract class CategoryComponent {
 
                     setIndex0ComboBoxes();
                     setNormalComboBoxes();   
+                    getCategoryTextArea().setText("");
                 }
             });
         }
         
         return this.normalButton; 
+    }
+    
+    public JTextArea getCategoryTextArea() {
+        
+        if(this.textArea == null) {
+            
+            textArea = new JTextArea();
+            textArea.setWrapStyleWord(true);
+            textArea.setLineWrap(true);
+            textArea.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1));
+            String placeholder = "Digite sua nota opcional aqui...";
+            Color placeholderColor = Color.LIGHT_GRAY;
+            Color textColor = Color.BLACK;
+            Font italicFont = textArea.getFont().deriveFont(Font.ITALIC);
+            Font normalFont = textArea.getFont().deriveFont(Font.PLAIN);
+            textArea.setText(placeholder);
+            textArea.setFont(italicFont);
+            textArea.setForeground(placeholderColor);
+
+            textArea.addFocusListener(new FocusAdapter() {
+                @Override
+                public void focusGained(FocusEvent e) {
+                    if (textArea.getText().equals(placeholder)) {
+                        textArea.setText("");
+                        textArea.setFont(normalFont);
+                        textArea.setForeground(textColor);
+                    }
+                }
+            });
+            textArea.getDocument().addDocumentListener(new DocumentListener() {
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                
+                    checkResetButton();
+                    Report.getReport().updateReportPane();
+                }
+
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    
+                    checkResetButton();
+                    Report.getReport().updateReportPane();
+                }
+
+                @Override
+                public void changedUpdate(DocumentEvent e) {
+                    
+                    checkResetButton();
+                    Report.getReport().updateReportPane();
+                }
+            });
+            
+            JScrollPane scroll = new JScrollPane(textArea);
+            scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+            scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        }
+        
+        return textArea;
     }
     
     public String getCategoryText() {
@@ -137,8 +209,8 @@ public abstract class CategoryComponent {
         
         while(iterator.hasNext()) {
             
-            if(iterator.next().getSelectedIndex() != 0) {
-            
+            if(iterator.next().getSelectedIndex() != 0 || (!getCategoryTextArea().getText().equals("") && !getCategoryTextArea().getText().equals("Digite sua nota opcional aqui..."))) {
+
                 this.resetButton.setEnabled(true);
                 return 1;
             }
@@ -147,10 +219,6 @@ public abstract class CategoryComponent {
         this.resetButton.setEnabled(false);
         return 0;
     }
-    
-    public abstract void setNormalComboBoxes();
-    protected abstract void setCategoryListeners();
-    protected abstract void setHashCategoryReport();
     
     public JEditButton getEditButtonByName(String buttonName) {
         
@@ -189,4 +257,8 @@ public abstract class CategoryComponent {
         
         return categoryTextArray;
     }
+    
+    public abstract void setNormalComboBoxes();
+    protected abstract void setCategoryListeners();
+    protected abstract void setHashCategoryReport();
 }

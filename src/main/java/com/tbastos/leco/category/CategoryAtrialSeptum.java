@@ -49,6 +49,10 @@ public final class CategoryAtrialSeptum extends CategoryComponent {
         comboBoxHypertrophy = new JComboBoxSubcategory(new String[]{"", "Infiltração lipomatosa", "Hipertrofia lipomatosa"});
         jComboBoxSubcategories.add(comboBoxHypertrophy);
         
+        JLabelSubcategory notes = new JLabelSubcategory("Notas adicionais");
+        notes.setName("Notes");
+        jLabelSubcategories.add(notes);
+        
         setHashCategoryReport();
         setCategoryListeners();
     }

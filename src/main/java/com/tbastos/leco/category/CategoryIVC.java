@@ -44,10 +44,13 @@ public final class CategoryIVC extends CategoryComponent {
         editButtonModel.setName("Model");
         arrayEditButton.add(editButtonModel);
         
-        
         jLabelSubcategories.add(new JLabelSubcategory("Válvula de Eustáquio")); 
         comboBoxValv = new JComboBoxSubcategory(new String[]{"", "Presença de válvula de Eustáquio", "Presença de Rede de Chiari"});
         jComboBoxSubcategories.add(comboBoxValv);
+        
+        JLabelSubcategory notes = new JLabelSubcategory("Notas adicionais");
+        notes.setName("Notes");
+        jLabelSubcategories.add(notes);
         
         setHashCategoryReport();
         setCategoryListeners();

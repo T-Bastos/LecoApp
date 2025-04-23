@@ -86,6 +86,9 @@ public final class CategoryRightVentricle extends CategoryComponent {
         editButtonDiamet.setName("Diamet");
         arrayEditButton.add(editButtonDiamet);
         
+        JLabelSubcategory notes = new JLabelSubcategory("Notas adicionais");
+        notes.setName("Notes");
+        jLabelSubcategories.add(notes);
         
         setHashCategoryReport();
         setCategoryListeners();

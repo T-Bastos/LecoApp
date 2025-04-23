@@ -143,6 +143,10 @@ public final class CategoryConclusion extends CategoryComponent {
         comboBoxMiscellaneous = new JComboBoxSubcategory(new String[]{"", "Vide comentários", "Função sistólica biventricular preservada"});
         jComboBoxSubcategories.add(comboBoxMiscellaneous);
         
+        JLabelSubcategory notes = new JLabelSubcategory("Notas adicionais");
+        notes.setName("Notes");
+        jLabelSubcategories.add(notes);
+        
         setHashCategoryReport(); 
         setCategoryListeners();
     }

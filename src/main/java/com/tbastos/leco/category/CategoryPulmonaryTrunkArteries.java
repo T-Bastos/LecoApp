@@ -59,6 +59,10 @@ public final class CategoryPulmonaryTrunkArteries extends CategoryComponent {
         comboBoxHypertension = new JComboBoxSubcategory(new String[]{"", "Ausência de sinais - Pressão pulmonar", "Sistólica - D-shape", "Diastólica - D-shape"});
         jComboBoxSubcategories.add(comboBoxHypertension);
         
+        JLabelSubcategory notes = new JLabelSubcategory("Notas adicionais");
+        notes.setName("Notes");
+        jLabelSubcategories.add(notes);
+        
         setHashCategoryReport();
         setCategoryListeners();
     }

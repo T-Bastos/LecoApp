@@ -132,6 +132,10 @@ public class Report {
                 doc.insertString(doc.getLength(), Integer.toString(i + 1) + ". ", doc.getStyle("Size12"));
                 doc.insertString(doc.getLength(), category.getCategoryTitle() + ": ", doc.getStyle("BoldSize12"));
                 doc.insertString(doc.getLength(), category.getCategoryText(), doc.getStyle("Size12"));
+                if(!category.getCategoryTextArea().getText().equals("Digite sua nota opcional aqui...")) {
+                
+                    doc.insertString(doc.getLength(), category.getCategoryTextArea().getText(), doc.getStyle("Size12"));
+                }
                 doc.insertString(doc.getLength(), "\n", null);
                 i++;
             }
@@ -147,6 +151,10 @@ public class Report {
                 doc.insertString(doc.getLength(), "- " + iteratorCategoryConclusion.next() + "\n", doc.getStyle("Size12"));
             }
             
+            if(!category.getCategoryTextArea().getText().equals("") && !category.getCategoryTextArea().getText().equals("Digite sua nota opcional aqui...")) {
+                
+                doc.insertString(doc.getLength(), "- " + category.getCategoryTextArea().getText(), doc.getStyle("Size12"));
+            }
             
         } catch (BadLocationException ex) {
             

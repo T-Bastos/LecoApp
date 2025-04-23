@@ -71,6 +71,10 @@ public final class CategoryPericardium extends CategoryComponent {
         editButtonBlade.setName("Blade");
         arrayEditButton.add(editButtonBlade);
         
+        JLabelSubcategory notes = new JLabelSubcategory("Notas adicionais");
+        notes.setName("Notes");
+        jLabelSubcategories.add(notes);
+        
         setHashCategoryReport();
         setCategoryListeners();
     }

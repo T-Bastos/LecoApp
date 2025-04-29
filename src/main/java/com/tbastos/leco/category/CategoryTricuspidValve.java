@@ -34,6 +34,7 @@ public final class CategoryTricuspidValve extends CategoryComponent {
     private String orifice = "XXX";
     private String disp = "XXX";
     private String indexDoppler = "XXX";
+    private String periprostheticReflux = "XXX";
     private final JComboBoxSubcategory comboBoxModel;
     private final JComboBoxSubcategory comboBoxThickening;
     private final JComboBoxSubcategory comboBoxCalcification;
@@ -45,12 +46,14 @@ public final class CategoryTricuspidValve extends CategoryComponent {
     private final JComboBoxSubcategory comboBoxOrifice;
     private final JComboBoxSubcategory comboBoxDisp;
     private final JComboBoxSubcategory comboBoxIndexDoppler;
+    private final JComboBoxSubcategory comboBoxPeriprostheticReflux;
     private final JEditButton editMidButtonGradient;
     private final JEditButton editButtonPht;
     private final JEditButton editButtonValveArea;
     private final JEditButton editButtonOrifice;
     private final JEditButton editButtonDisp;
     private final JEditButton editButtonIndexDoppler;
+    private final JEditButton editButtonPeriprostheticReflux;
     
     public CategoryTricuspidValve() {
         
@@ -65,7 +68,6 @@ public final class CategoryTricuspidValve extends CategoryComponent {
         
         jLabelSubcategories.add(new JLabelSubcategory("Espessamento")); 
         comboBoxThickening = new JComboBoxSubcategory(new String[]{"", "Ecotextura normal", "Espessamento discreto", "Espessamento moderado", "Espessamento importante"});
-        comboBoxThickening.setEnabled(false);
         jComboBoxSubcategories.add(comboBoxThickening);
         
         jLabelSubcategories.add(new JLabelSubcategory("Ebstein - medida"));
@@ -89,8 +91,16 @@ public final class CategoryTricuspidValve extends CategoryComponent {
         
         jLabelSubcategories.add(new JLabelSubcategory("Refluxo")); 
         comboBoxReflux = new JComboBoxSubcategory(new String[]{"", "Ausente", "Discreto", "Moderado", "Importante"});
-        comboBoxReflux.setEnabled(false);
         jComboBoxSubcategories.add(comboBoxReflux);
+        
+        jLabelSubcategories.add(new JLabelSubcategory("Refluxo periprotético")); 
+        comboBoxPeriprostheticReflux = new JComboBoxSubcategory(new String[]{"", "Leak discreto", "Leak moderado", "Leak importante", "<html>Leak discreto - <b>DEFINIR</b></html>", "<html>Leak moderado - <b>DEFINIR</b></html>", "<html>Leak importante - <b>DEFINIR</b></html>"});
+        comboBoxPeriprostheticReflux.setName("PeriprostheticReflux");
+        comboBoxPeriprostheticReflux.setEnabled(false);
+        jComboBoxSubcategories.add(comboBoxPeriprostheticReflux);   
+        editButtonPeriprostheticReflux = new JEditButton();
+        editButtonPeriprostheticReflux.setName("PeriprostheticReflux");
+        arrayEditButton.add(editButtonPeriprostheticReflux);
         
         jLabelSubcategories.add(new JLabelSubcategory("Orifício efetivo regurgitante")); 
         comboBoxOrifice = new JComboBoxSubcategory(new String[]{"", "<html>Orifício - <b>DEFINIR</b></html>"});
@@ -140,9 +150,34 @@ public final class CategoryTricuspidValve extends CategoryComponent {
         setCategoryListeners();
     }
     
-    @Override
     protected void setCategoryListeners() {
          
+        editButtonPeriprostheticReflux.addActionListener((ActionEvent e) -> {
+            
+            fillFormPeriprostheticReflux();
+        });
+        
+        comboBoxPeriprostheticReflux.addItemListener((ItemEvent e) -> {
+            
+            if(e.getStateChange() == ItemEvent.SELECTED) {
+                
+                checkResetButton();
+                if(comboBoxPeriprostheticReflux.getSelectedIndex() == 0 || comboBoxPeriprostheticReflux.getSelectedIndex() == 1
+                        || comboBoxPeriprostheticReflux.getSelectedIndex() == 2 || comboBoxPeriprostheticReflux.getSelectedIndex() == 3 || comboBoxPeriprostheticReflux.getSelectedIndex() == 4) {
+                    
+                    periprostheticReflux = "XXX";
+                    editButtonPeriprostheticReflux.setEnabled(false);
+                    setHashCategoryReport();
+                    Report.getReport().updateReportPane();
+                } else {
+                    
+                    periprostheticReflux = "XXX";
+                    editButtonPeriprostheticReflux.setEnabled(true);
+                    fillFormPeriprostheticReflux();
+                }
+            }
+        });
+        
         editButtonIndexDoppler.addActionListener((ActionEvent e) -> {
             
             fillFormIndexDoppler();
@@ -303,41 +338,81 @@ public final class CategoryTricuspidValve extends CategoryComponent {
                 if(selectedIndex == 5) {
                     
                     jLabelCategory.setText("<html>Prótese biológica <br>em posição tricúspide</br></html>");
+                    comboBoxReflux.removeAllItems();
+                    comboBoxReflux.addItem("");
+                    comboBoxReflux.addItem("Protético ausente");
+                    comboBoxReflux.addItem("Protético mínimo(funcional)");
+                    comboBoxReflux.addItem("Protético discreto");
+                    comboBoxReflux.addItem("Protético moderado");
+                    comboBoxReflux.addItem("Protético importante");
                 } else if(selectedIndex == 6) {
                     
                     jLabelCategory.setText("<html>Prótese mecânica <br>em posição tricúspide</br></html>");
+                    comboBoxReflux.removeAllItems();
+                    comboBoxReflux.addItem("");
+                    comboBoxReflux.addItem("Protético ausente");
+                    comboBoxReflux.addItem("Protético mínimo(funcional)");
+                    comboBoxReflux.addItem("Protético discreto");
+                    comboBoxReflux.addItem("Protético moderado");
+                    comboBoxReflux.addItem("Protético importante");
                 } else {
                     
                     jLabelCategory.setText("Valva tricúspide");
+                    if(comboBoxReflux.getItemCount() > 5) {
+                        
+                        comboBoxReflux.removeAllItems();
+                        comboBoxReflux.addItem("");
+                        comboBoxReflux.addItem("Ausente");
+                        comboBoxReflux.addItem("Discreto");
+                        comboBoxReflux.addItem("Moderado");
+                        comboBoxReflux.addItem("Importante");
+                    }
                 }
                 
-                if(selectedIndex == 1 || selectedIndex == 5 || selectedIndex == 4 ||
-                        selectedIndex == 6) {
-                    
-                    comboBoxThickening.setEnabled(true);
+                if(selectedIndex == 5 || selectedIndex == 6) {
+                
+                    comboBoxPeriprostheticReflux.setEnabled(true);
                     comboBoxMobility.setEnabled(true);
-                    comboBoxReflux.setEnabled(true);
+                    comboBoxCalcification.setEnabled(false);
+                    comboBoxCalcification.setSelectedIndex(0);
+                    comboBoxDisp.setEnabled(false);
+                    comboBoxDisp.setSelectedIndex(0);
+                } else if(selectedIndex == 1 || selectedIndex == 4) {
+                    
+                    comboBoxPeriprostheticReflux.setEnabled(false);
+                    comboBoxPeriprostheticReflux.setSelectedIndex(0);
+                    comboBoxMobility.setEnabled(true);
                     comboBoxCalcification.setEnabled(false);
                     comboBoxCalcification.setSelectedIndex(0);
                     comboBoxDisp.setEnabled(false);
                     comboBoxDisp.setSelectedIndex(0);
                 } else if(selectedIndex == 2) {
                     
-                    comboBoxThickening.setEnabled(true);
+                    comboBoxPeriprostheticReflux.setEnabled(false);
+                    comboBoxPeriprostheticReflux.setSelectedIndex(0);
                     comboBoxCalcification.setEnabled(true);
                     comboBoxMobility.setEnabled(true);
-                    comboBoxReflux.setEnabled(true);
                     comboBoxDisp.setEnabled(false);
                     comboBoxDisp.setSelectedIndex(0);
                 } else if(selectedIndex == 3) {
                     
-                    comboBoxThickening.setEnabled(true);
+                    comboBoxPeriprostheticReflux.setEnabled(false);
+                    comboBoxPeriprostheticReflux.setSelectedIndex(0);
                     comboBoxCalcification.setEnabled(false);
                     comboBoxCalcification.setSelectedIndex(0);
                     comboBoxMobility.setEnabled(false);
                     comboBoxMobility.setSelectedIndex(0);
-                    comboBoxReflux.setEnabled(true);
                     comboBoxDisp.setEnabled(true);
+                } else if(selectedIndex == 0) {
+                
+                    comboBoxPeriprostheticReflux.setEnabled(false);
+                    comboBoxPeriprostheticReflux.setSelectedIndex(0);
+                    comboBoxCalcification.setEnabled(false);
+                    comboBoxCalcification.setSelectedIndex(0);
+                    comboBoxMobility.setEnabled(false);
+                    comboBoxMobility.setSelectedIndex(0);
+                    comboBoxDisp.setEnabled(false);
+                    comboBoxDisp.setSelectedIndex(0);
                 }
                 
                 setHashCategoryReport();
@@ -416,6 +491,43 @@ public final class CategoryTricuspidValve extends CategoryComponent {
                 Report.getReport().updateReportPane();
             }
         });
+    }
+    
+    private void fillFormPeriprostheticReflux() {
+        
+        JTextField field1 = new JTextField(10);
+        field1.setText(periprostheticReflux);
+
+        Object[] input = new Object[2];
+        input[0] = "Topografia:";
+        input[1] = field1;
+
+        JOptionPane optionPane = new JOptionPane(
+                input,
+                JOptionPane.PLAIN_MESSAGE,
+                JOptionPane.OK_CANCEL_OPTION
+        );
+
+        JDialog dialog = optionPane.createDialog("Defina os parâmetros");
+
+        Timer timer = new Timer(100, (ActionEvent e) -> {
+            field1.requestFocusInWindow();
+        });
+        
+        timer.setRepeats(false);
+        timer.start();
+
+        dialog.setVisible(true);
+        
+        Object selectedValue = optionPane.getValue();
+        
+        if (selectedValue instanceof Integer && (Integer) selectedValue == JOptionPane.OK_OPTION) {
+
+            periprostheticReflux = field1.getText();
+        }   
+        
+        setHashCategoryReport();
+        Report.getReport().updateReportPane();
     }
     
     private void fillFormDisp() {
@@ -673,6 +785,11 @@ public final class CategoryTricuspidValve extends CategoryComponent {
         hashCategoryReport.put("Discreto", "");
         hashCategoryReport.put("Moderado", "");
         hashCategoryReport.put("Importante", "");
+        hashCategoryReport.put("Protético ausente", "");
+        hashCategoryReport.put("Protético mínimo(funcional)", "");
+        hashCategoryReport.put("Protético discreto", "");
+        hashCategoryReport.put("Protético moderado", "");
+        hashCategoryReport.put("Protético importante", "");
         hashCategoryReport.put("Reduzida em grau discreto", "");
         hashCategoryReport.put("Reduzida em grau moderado", "");
         hashCategoryReport.put("Reduzida em grau importante", "");
@@ -685,6 +802,12 @@ public final class CategoryTricuspidValve extends CategoryComponent {
         hashCategoryReport.put("<html>Planimetria - <b>DEFINIR</b></html>", "Área valvar: " + valveArea + " cm² (planimetria). ");
         hashCategoryReport.put("<html>Orifício - <b>DEFINIR</b></html>", "Orifício efetivo regurgitante estimado em " + orifice + " cm². ");
         hashCategoryReport.put("<html>Índice Doppler - <b>DEFINIR</b></html>", "Índice Doppler: " + indexDoppler + " (sugestivo de obstrução significativa se < 2,0). ");
+        hashCategoryReport.put("Leak discreto", "Presença de refluxo periprotético (leak) de grau discreto. ");
+        hashCategoryReport.put("Leak moderado", "Presença de refluxo periprotético (leak) de grau moderado. ");
+        hashCategoryReport.put("Leak importante", "Presença de refluxo periprotético (leak) de grau importante. ");
+        hashCategoryReport.put("<html>Leak discreto - <b>DEFINIR</b></html>", "Presença de refluxo periprotético (leak) de grau discreto em topografia " + periprostheticReflux + ". ");
+        hashCategoryReport.put("<html>Leak moderado - <b>DEFINIR</b></html>", "Presença de refluxo periprotético (leak) de grau moderado em topografia " + periprostheticReflux + ". ");
+        hashCategoryReport.put("<html>Leak importante - <b>DEFINIR</b></html>", "Presença de refluxo periprotético (leak) de grau importante em topografia " + periprostheticReflux + ". ");
     }      
     
     @Override
@@ -694,10 +817,5 @@ public final class CategoryTricuspidValve extends CategoryComponent {
         comboBoxThickening.setSelectedIndex(1);
         comboBoxMobility.setSelectedIndex(1);
         comboBoxReflux.setSelectedIndex(1);
-        editMidButtonGradient.setEnabled(false);
-        editButtonPht.setEnabled(false);
-        editButtonValveArea.setEnabled(false);
-        editButtonOrifice.setEnabled(false);
-        editButtonDisp.setEnabled(false);
     }
 }

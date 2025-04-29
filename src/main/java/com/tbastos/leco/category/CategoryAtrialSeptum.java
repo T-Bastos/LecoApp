@@ -57,7 +57,6 @@ public final class CategoryAtrialSeptum extends CategoryComponent {
         setCategoryListeners();
     }
     
-    @Override
     protected void setCategoryListeners() {
         
         editButtonModel.addActionListener((ActionEvent e) -> {
@@ -157,7 +156,6 @@ public final class CategoryAtrialSeptum extends CategoryComponent {
     @Override
     public void setNormalComboBoxes() {
         
-        editButtonModel.setEnabled(false);
         comboBoxModel.setSelectedIndex(1);
     }
 }

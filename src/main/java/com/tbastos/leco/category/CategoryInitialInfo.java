@@ -57,7 +57,6 @@ public final class CategoryInitialInfo extends CategoryComponent {
         setCategoryListeners();
     }
     
-    @Override
     protected void setCategoryListeners() {
         
         editButtonPosOp.addActionListener((ActionEvent e) -> {
@@ -169,7 +168,6 @@ public final class CategoryInitialInfo extends CategoryComponent {
     @Override
     public void setNormalComboBoxes() {
         
-        editButtonPosOp.setEnabled(false);
         comboBoxRate.setSelectedIndex(1);
     }
 }

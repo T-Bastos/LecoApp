@@ -89,7 +89,6 @@ public final class CategoryLeftVentricle extends CategoryComponent {
         setCategoryListeners();
     }
     
-    @Override
     protected void setCategoryListeners() {
         
         editButtonSys.addActionListener((ActionEvent e) -> {
@@ -373,9 +372,6 @@ public final class CategoryLeftVentricle extends CategoryComponent {
     @Override
     public void setNormalComboBoxes() {
         
-        editButtonSys.setEnabled(false);
-        editButtonDysAneu.setEnabled(false);
-        editButtonStrain.setEnabled(false);
         comboBoxSize.setSelectedIndex(1);
         comboBoxSys.setSelectedIndex(1);
         comboBoxDys.setSelectedIndex(1);

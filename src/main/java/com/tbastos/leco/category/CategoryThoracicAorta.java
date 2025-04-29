@@ -43,7 +43,6 @@ public final class CategoryThoracicAorta extends CategoryComponent {
         setCategoryListeners();
     }
     
-    @Override
     protected void setCategoryListeners() {
     
         comboBoxSize.addItemListener((ItemEvent e) -> {

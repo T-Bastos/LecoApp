@@ -157,7 +157,6 @@ public final class CategoryConclusion extends CategoryComponent {
         comboBoxNormal.setSelectedIndex(1);
     }
 
-    @Override
     protected void setCategoryListeners() {
         
         editButtonMitralValve.addActionListener((ActionEvent e) -> {

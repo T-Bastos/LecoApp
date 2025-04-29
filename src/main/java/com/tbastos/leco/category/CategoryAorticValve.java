@@ -36,6 +36,7 @@ public final class CategoryAorticValve extends CategoryComponent {
     private String indexDoppler = "XXX";
     private String valv1 = "XXX";
     private String valv2 = "XXX";
+    private String periprostheticReflux = "XXX";
     private final JComboBoxSubcategory comboBoxModel;
     private final JComboBoxSubcategory comboBoxThickening;
     private final JComboBoxSubcategory comboBoxMobility;
@@ -48,6 +49,7 @@ public final class CategoryAorticValve extends CategoryComponent {
     private final JComboBoxSubcategory comboBoxIndexDoppler;
     private final JComboBoxSubcategory comboBoxTacTe;
     private final JComboBoxSubcategory comboBoxOrifice;
+    private final JComboBoxSubcategory comboBoxPeriprostheticReflux;
     private final JEditButton editButtonMaxGradient;
     private final JEditButton editButtonMidGradient;
     private final JEditButton editButtonValveArea;
@@ -55,6 +57,7 @@ public final class CategoryAorticValve extends CategoryComponent {
     private final JEditButton editButtonTacTe;
     private final JEditButton editButtonOrifice;
     private final JEditButton editButtonRaphe;
+    private final JEditButton editButtonPeriprostheticReflux;
     
     public CategoryAorticValve() {
         
@@ -84,8 +87,16 @@ public final class CategoryAorticValve extends CategoryComponent {
         
         jLabelSubcategories.add(new JLabelSubcategory("Refluxo")); 
         comboBoxReflux = new JComboBoxSubcategory(new String[]{"", "Ausente", "Discreto", "Moderado", "Importante"});
-        comboBoxReflux.setEnabled(false);
         jComboBoxSubcategories.add(comboBoxReflux);
+        
+        jLabelSubcategories.add(new JLabelSubcategory("Refluxo periprotético")); 
+        comboBoxPeriprostheticReflux = new JComboBoxSubcategory(new String[]{"", "Leak discreto", "Leak moderado", "Leak importante", "<html>Leak discreto - <b>DEFINIR</b></html>", "<html>Leak moderado - <b>DEFINIR</b></html>", "<html>Leak importante - <b>DEFINIR</b></html>"});
+        comboBoxPeriprostheticReflux.setName("PeriprostheticReflux");
+        comboBoxPeriprostheticReflux.setEnabled(false);
+        jComboBoxSubcategories.add(comboBoxPeriprostheticReflux);   
+        editButtonPeriprostheticReflux = new JEditButton();
+        editButtonPeriprostheticReflux.setName("PeriprostheticReflux");
+        arrayEditButton.add(editButtonPeriprostheticReflux);
         
         jLabelSubcategories.add(new JLabelSubcategory("Orifício efetivo regurgitante")); 
         comboBoxOrifice = new JComboBoxSubcategory(new String[]{"", "<html>Orifício - <b>DEFINIR</b></html>"});
@@ -152,8 +163,33 @@ public final class CategoryAorticValve extends CategoryComponent {
         setCategoryListeners();
     }
     
-    @Override
     protected void setCategoryListeners() {
+        
+        editButtonPeriprostheticReflux.addActionListener((ActionEvent e) -> {
+            
+            fillFormPeriprostheticReflux();
+        });
+        
+        comboBoxPeriprostheticReflux.addItemListener((ItemEvent e) -> {
+            
+            if(e.getStateChange() == ItemEvent.SELECTED) {
+                
+                checkResetButton();
+                if(comboBoxPeriprostheticReflux.getSelectedIndex() == 0 || comboBoxPeriprostheticReflux.getSelectedIndex() == 1
+                        || comboBoxPeriprostheticReflux.getSelectedIndex() == 2 || comboBoxPeriprostheticReflux.getSelectedIndex() == 3 || comboBoxPeriprostheticReflux.getSelectedIndex() == 4) {
+                    
+                    periprostheticReflux = "XXX";
+                    editButtonPeriprostheticReflux.setEnabled(false);
+                    setHashCategoryReport();
+                    Report.getReport().updateReportPane();
+                } else {
+                    
+                    periprostheticReflux = "XXX";
+                    editButtonPeriprostheticReflux.setEnabled(true);
+                    fillFormPeriprostheticReflux();
+                }
+            }
+        });
         
         comboBoxModel.addItemListener((ItemEvent e) -> {
             
@@ -165,50 +201,97 @@ public final class CategoryAorticValve extends CategoryComponent {
                 if(selectedIndex == 5) {
                     
                     jLabelCategory.setText("<html>Prótese biológica <br>em posição aórtica</br></html>");
+                    comboBoxReflux.removeAllItems();
+                    comboBoxReflux.addItem("");
+                    comboBoxReflux.addItem("Protético ausente");
+                    comboBoxReflux.addItem("Protético mínimo(funcional)");
+                    comboBoxReflux.addItem("Protético discreto");
+                    comboBoxReflux.addItem("Protético moderado");
+                    comboBoxReflux.addItem("Protético importante");
                 } else if(selectedIndex == 6) {
                     
                     jLabelCategory.setText("<html>Prótese mecânica <br>em posição aórtica</br></html>");
+                    comboBoxReflux.removeAllItems();
+                    comboBoxReflux.addItem("");
+                    comboBoxReflux.addItem("Protético ausente");
+                    comboBoxReflux.addItem("Protético mínimo(funcional)");
+                    comboBoxReflux.addItem("Protético discreto");
+                    comboBoxReflux.addItem("Protético moderado");
+                    comboBoxReflux.addItem("Protético importante");
                 } else {
                     
                     jLabelCategory.setText("Valva aórtica");
+                    if(comboBoxReflux.getItemCount() > 5) {
+                        
+                        comboBoxReflux.removeAllItems();
+                        comboBoxReflux.addItem("");
+                        comboBoxReflux.addItem("Ausente");
+                        comboBoxReflux.addItem("Discreto");
+                        comboBoxReflux.addItem("Moderado");
+                        comboBoxReflux.addItem("Importante");
+                    }
                 }
                 
-                if(selectedIndex == 1 || selectedIndex == 5 ||
-                        selectedIndex == 6) {
-                    
+                if(selectedIndex == 5 || selectedIndex == 6) {
+                
+                    comboBoxPeriprostheticReflux.setEnabled(true);
                     comboBoxThickening.setEnabled(true);
                     comboBoxMobility.setEnabled(true);
-                    comboBoxReflux.setEnabled(true);
+                    comboBoxCalcification.setEnabled(false);
+                    comboBoxCalcification.setSelectedIndex(0);
+                    comboBoxRaphe.setEnabled(false);
+                    comboBoxRaphe.setSelectedIndex(0);
+                } else if(selectedIndex == 1) {
+                    
+                    comboBoxPeriprostheticReflux.setEnabled(false);
+                    comboBoxPeriprostheticReflux.setSelectedIndex(0);
+                    comboBoxThickening.setEnabled(true);
+                    comboBoxMobility.setEnabled(true);
                     comboBoxCalcification.setEnabled(false);
                     comboBoxCalcification.setSelectedIndex(0);
                     comboBoxRaphe.setEnabled(false);
                     comboBoxRaphe.setSelectedIndex(0);
                 } else if(selectedIndex == 2) {
                     
+                    comboBoxPeriprostheticReflux.setEnabled(false);
+                    comboBoxPeriprostheticReflux.setSelectedIndex(0);
                     comboBoxThickening.setEnabled(true);
                     comboBoxCalcification.setEnabled(true);
                     comboBoxMobility.setEnabled(true);
-                    comboBoxReflux.setEnabled(true);
                     comboBoxRaphe.setEnabled(false);
                     comboBoxRaphe.setSelectedIndex(0);
                 } else if (selectedIndex == 4) {
                     
+                    comboBoxPeriprostheticReflux.setEnabled(false);
+                    comboBoxPeriprostheticReflux.setSelectedIndex(0);
                     comboBoxThickening.setEnabled(false);
                     comboBoxThickening.setSelectedIndex(0);
                     comboBoxCalcification.setEnabled(false);
                     comboBoxCalcification.setSelectedIndex(0);
                     comboBoxMobility.setEnabled(true);
-                    comboBoxReflux.setEnabled(true);
                     comboBoxRaphe.setEnabled(false);
                     comboBoxRaphe.setSelectedIndex(0);
                 } else if(selectedIndex == 3) {
                     
+                    comboBoxPeriprostheticReflux.setEnabled(false);
+                    comboBoxPeriprostheticReflux.setSelectedIndex(0);
                     comboBoxThickening.setEnabled(true);
                     comboBoxCalcification.setEnabled(false);
                     comboBoxCalcification.setSelectedIndex(0);
                     comboBoxMobility.setEnabled(true);
-                    comboBoxReflux.setEnabled(true);
                     comboBoxRaphe.setEnabled(true);
+                } else if(selectedIndex == 0) {
+                
+                    comboBoxPeriprostheticReflux.setEnabled(false);
+                    comboBoxPeriprostheticReflux.setSelectedIndex(0);
+                    comboBoxThickening.setEnabled(false);
+                    comboBoxThickening.setSelectedIndex(0);
+                    comboBoxCalcification.setEnabled(false);
+                    comboBoxCalcification.setSelectedIndex(0);
+                    comboBoxMobility.setEnabled(false);
+                    comboBoxMobility.setSelectedIndex(0);
+                    comboBoxRaphe.setEnabled(false);
+                    comboBoxRaphe.setSelectedIndex(0);
                 }
                 
                 setHashCategoryReport();
@@ -627,6 +710,43 @@ public final class CategoryAorticValve extends CategoryComponent {
         Report.getReport().updateReportPane();
     }
     
+    private void fillFormPeriprostheticReflux() {
+        
+        JTextField field1 = new JTextField(10);
+        field1.setText(periprostheticReflux);
+
+        Object[] input = new Object[2];
+        input[0] = "Topografia:";
+        input[1] = field1;
+
+        JOptionPane optionPane = new JOptionPane(
+                input,
+                JOptionPane.PLAIN_MESSAGE,
+                JOptionPane.OK_CANCEL_OPTION
+        );
+
+        JDialog dialog = optionPane.createDialog("Defina os parâmetros");
+
+        Timer timer = new Timer(100, (ActionEvent e) -> {
+            field1.requestFocusInWindow();
+        });
+        
+        timer.setRepeats(false);
+        timer.start();
+
+        dialog.setVisible(true);
+        
+        Object selectedValue = optionPane.getValue();
+        
+        if (selectedValue instanceof Integer && (Integer) selectedValue == JOptionPane.OK_OPTION) {
+
+            periprostheticReflux = field1.getText();
+        }   
+        
+        setHashCategoryReport();
+        Report.getReport().updateReportPane();
+    }
+    
     private void fillFormIndexDoppler() {
         
         JTextField field1 = new JTextField(10);
@@ -762,6 +882,11 @@ public final class CategoryAorticValve extends CategoryComponent {
         hashCategoryReport.put("Discreto", "");
         hashCategoryReport.put("Moderado", "");
         hashCategoryReport.put("Importante", "");
+        hashCategoryReport.put("Protético ausente", "");
+        hashCategoryReport.put("Protético mínimo(funcional)", "");
+        hashCategoryReport.put("Protético discreto", "");
+        hashCategoryReport.put("Protético moderado", "");
+        hashCategoryReport.put("Protético importante", "");
         hashCategoryReport.put("Reduzida em grau discreto", "");
         hashCategoryReport.put("Reduzida em grau moderado", "");
         hashCategoryReport.put("Reduzida em grau importante", "");
@@ -775,6 +900,12 @@ public final class CategoryAorticValve extends CategoryComponent {
         hashCategoryReport.put("<html>Orifício - <b>DEFINIR</b></html>", "Orifício efetivo regurgitante estimado em " + orifice + " cm². ");
         hashCategoryReport.put("<html>Relação aceleração/tempo - <b>DEFINIR</b></html>", "Relação Tempo de aceleração/tempo de ejeção: " + tacte + " (sugestivo de obstrução significativa se > 0,37). ");
         hashCategoryReport.put("<html>Índice Doppler - <b>DEFINIR</b></html>", "Índice Doppler: " + indexDoppler + " (sugestivo de obstrução significativa se < 0,25). ");
+        hashCategoryReport.put("Leak discreto", "Presença de refluxo periprotético (leak) de grau discreto. ");
+        hashCategoryReport.put("Leak moderado", "Presença de refluxo periprotético (leak) de grau moderado. ");
+        hashCategoryReport.put("Leak importante", "Presença de refluxo periprotético (leak) de grau importante. ");
+        hashCategoryReport.put("<html>Leak discreto - <b>DEFINIR</b></html>", "Presença de refluxo periprotético (leak) de grau discreto em topografia " + periprostheticReflux + ". ");
+        hashCategoryReport.put("<html>Leak moderado - <b>DEFINIR</b></html>", "Presença de refluxo periprotético (leak) de grau moderado em topografia " + periprostheticReflux + ". ");
+        hashCategoryReport.put("<html>Leak importante - <b>DEFINIR</b></html>", "Presença de refluxo periprotético (leak) de grau importante em topografia " + periprostheticReflux + ". ");
     }  
     
     @Override
@@ -784,12 +915,5 @@ public final class CategoryAorticValve extends CategoryComponent {
         comboBoxThickening.setSelectedIndex(1);
         comboBoxMobility.setSelectedIndex(1);
         comboBoxReflux.setSelectedIndex(1);
-        editButtonMaxGradient.setEnabled(false);
-        editButtonMidGradient.setEnabled(false);
-        editButtonValveArea.setEnabled(false);
-        editButtonIndexDoppler.setEnabled(false);
-        editButtonTacTe.setEnabled(false);
-        editButtonOrifice.setEnabled(false);
-        editButtonRaphe.setEnabled(false);
     }
 }

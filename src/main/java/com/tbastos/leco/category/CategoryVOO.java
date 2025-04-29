@@ -58,8 +58,7 @@ public final class CategoryVOO extends CategoryComponent {
         setHashCategoryReport();
         setCategoryListeners();
     }
-    
-    @Override
+
     protected void setCategoryListeners() {
         
         editButtonObstruction.addActionListener((ActionEvent e) -> {
@@ -206,8 +205,6 @@ public final class CategoryVOO extends CategoryComponent {
     @Override
     public void setNormalComboBoxes() {
         
-        editButtonObstruction.setEnabled(false);
-        editButtonDiamet.setEnabled(false);
         comboBoxObstruction.setSelectedIndex(1);
     }
 }

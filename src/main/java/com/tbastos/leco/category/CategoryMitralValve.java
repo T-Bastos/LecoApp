@@ -44,6 +44,7 @@ public final class CategoryMitralValve extends CategoryComponent {
     private String calcificationWilkins = "XXX";
     private String subvalveWilkins = "XXX";
     private String indexDoppler = "XXX";
+    private String periprostheticReflux = "XXX";
     private final JComboBoxSubcategory comboBoxModel;
     private final JComboBoxSubcategory comboBoxThickening;
     private final JComboBoxSubcategory comboBoxCalcification;
@@ -56,12 +57,14 @@ public final class CategoryMitralValve extends CategoryComponent {
     private final JComboBoxSubcategory comboBoxOrifice;
     private final JComboBoxSubcategory comboBoxWilkins;
     private final JComboBoxSubcategory comboBoxIndexDoppler;
+    private final JComboBoxSubcategory comboBoxPeriprostheticReflux;
     private final JEditButton editButtonGradient;
     private final JEditButton editButtonPht;
     private final JEditButton editButtonValveArea;
     private final JEditButton editButtonOrifice;
     private final JEditButton editButtonWilkins;
     private final JEditButton editButtonIndexDoppler;
+    private final JEditButton editButtonPeriprostheticReflux;
     
     public CategoryMitralValve() {
           
@@ -76,7 +79,6 @@ public final class CategoryMitralValve extends CategoryComponent {
         
         jLabelSubcategories.add(new JLabelSubcategory("Espessamento")); 
         comboBoxThickening = new JComboBoxSubcategory(new String[]{"", "Ecotextura normal", "Espessamento discreto", "Espessamento moderado", "Espessamento importante"});
-        comboBoxThickening.setEnabled(false);
         jComboBoxSubcategories.add(comboBoxThickening);
         
         jLabelSubcategories.add(new JLabelSubcategory("Calcificação")); 
@@ -91,8 +93,16 @@ public final class CategoryMitralValve extends CategoryComponent {
         
         jLabelSubcategories.add(new JLabelSubcategory("Refluxo")); 
         comboBoxReflux = new JComboBoxSubcategory(new String[]{"", "Ausente", "Mínimo", "Discreto", "Moderado", "Importante"});
-        comboBoxReflux.setEnabled(false);
         jComboBoxSubcategories.add(comboBoxReflux);    
+        
+        jLabelSubcategories.add(new JLabelSubcategory("Refluxo periprotético")); 
+        comboBoxPeriprostheticReflux = new JComboBoxSubcategory(new String[]{"", "Leak discreto", "Leak moderado", "Leak importante", "<html>Leak discreto - <b>DEFINIR</b></html>", "<html>Leak moderado - <b>DEFINIR</b></html>", "<html>Leak importante - <b>DEFINIR</b></html>"});
+        comboBoxPeriprostheticReflux.setName("PeriprostheticReflux");
+        comboBoxPeriprostheticReflux.setEnabled(false);
+        jComboBoxSubcategories.add(comboBoxPeriprostheticReflux);   
+        editButtonPeriprostheticReflux = new JEditButton();
+        editButtonPeriprostheticReflux.setName("PeriprostheticReflux");
+        arrayEditButton.add(editButtonPeriprostheticReflux);
         
         jLabelSubcategories.add(new JLabelSubcategory("Orifício efetivo regurgitante")); 
         comboBoxOrifice = new JComboBoxSubcategory(new String[]{"", "<html>Orifício - <b>DEFINIR</b></html>"});
@@ -155,8 +165,33 @@ public final class CategoryMitralValve extends CategoryComponent {
         setCategoryListeners();
     }
     
-    @Override
     protected void setCategoryListeners() {
+        
+        editButtonPeriprostheticReflux.addActionListener((ActionEvent e) -> {
+            
+            fillFormPeriprostheticReflux();
+        });
+        
+        comboBoxPeriprostheticReflux.addItemListener((ItemEvent e) -> {
+            
+            if(e.getStateChange() == ItemEvent.SELECTED) {
+                
+                checkResetButton();
+                if(comboBoxPeriprostheticReflux.getSelectedIndex() == 0 || comboBoxPeriprostheticReflux.getSelectedIndex() == 1
+                        || comboBoxPeriprostheticReflux.getSelectedIndex() == 2 || comboBoxPeriprostheticReflux.getSelectedIndex() == 3) {
+                    
+                    periprostheticReflux = "XXX";
+                    editButtonPeriprostheticReflux.setEnabled(false);
+                    setHashCategoryReport();
+                    Report.getReport().updateReportPane();
+                } else {
+                    
+                    periprostheticReflux = "XXX";
+                    editButtonPeriprostheticReflux.setEnabled(true);
+                    fillFormPeriprostheticReflux();
+                }
+            }
+        });
         
         editButtonIndexDoppler.addActionListener((ActionEvent e) -> {
             
@@ -319,24 +354,53 @@ public final class CategoryMitralValve extends CategoryComponent {
                 checkResetButton();
                 int selectedIndex = comboBoxModel.getSelectedIndex();
                 
-                comboBoxThickening.setEnabled(true);
-                comboBoxReflux.setEnabled(true);
-                
                 if(selectedIndex == 9) {
                     
                     jLabelCategory.setText("<html>Prótese biológica <br>em posição mitral</br></html>");
+                    comboBoxReflux.removeAllItems();
+                    comboBoxReflux.addItem("");
+                    comboBoxReflux.addItem("Protético ausente");
+                    comboBoxReflux.addItem("Protético mínimo(funcional)");
+                    comboBoxReflux.addItem("Protético discreto");
+                    comboBoxReflux.addItem("Protético moderado");
+                    comboBoxReflux.addItem("Protético importante");
                 } else if(selectedIndex == 10) {
                     
                     jLabelCategory.setText("<html>Prótese mecânica <br>em posição mitral</br></html>");
+                    comboBoxReflux.removeAllItems();
+                    comboBoxReflux.addItem("");
+                    comboBoxReflux.addItem("Protético ausente");
+                    comboBoxReflux.addItem("Protético mínimo(funcional)");
+                    comboBoxReflux.addItem("Protético discreto");
+                    comboBoxReflux.addItem("Protético moderado");
+                    comboBoxReflux.addItem("Protético importante");
                 } else {
                     
                     jLabelCategory.setText("Valva mitral");
+                    if(comboBoxReflux.getItemCount() > 5) {
+                        
+                        comboBoxReflux.removeAllItems();
+                        comboBoxReflux.addItem("");
+                        comboBoxReflux.addItem("Ausente");
+                        comboBoxReflux.addItem("Discreto");
+                        comboBoxReflux.addItem("Moderado");
+                        comboBoxReflux.addItem("Importante");
+                    }
                 }
                 
-                if(selectedIndex == 1 || selectedIndex == 9 ||
-                        selectedIndex == 10 || selectedIndex == 11 ||
+                if(selectedIndex == 9 || selectedIndex == 10) {
+                    
+                    comboBoxPeriprostheticReflux.setEnabled(true);
+                    comboBoxMobility.setEnabled(true);
+                    comboBoxCalcification.setEnabled(false);
+                    comboBoxCalcification.setSelectedIndex(0);
+                    comboBoxWilkins.setEnabled(false);
+                    comboBoxWilkins.setSelectedIndex(0);
+                } else if(selectedIndex == 1 || selectedIndex == 11 ||
                         selectedIndex == 12) {
                     
+                    comboBoxPeriprostheticReflux.setEnabled(false);
+                    comboBoxPeriprostheticReflux.setSelectedIndex(0);
                     comboBoxMobility.setEnabled(true);
                     comboBoxCalcification.setEnabled(false);
                     comboBoxCalcification.setSelectedIndex(0);
@@ -344,6 +408,8 @@ public final class CategoryMitralValve extends CategoryComponent {
                     comboBoxWilkins.setSelectedIndex(0);
                 } else if(selectedIndex == 3) {
                     
+                    comboBoxPeriprostheticReflux.setEnabled(false);
+                    comboBoxPeriprostheticReflux.setSelectedIndex(0);
                     comboBoxCalcification.setEnabled(true);
                     comboBoxMobility.setEnabled(true);
                     comboBoxWilkins.setEnabled(false);
@@ -351,6 +417,8 @@ public final class CategoryMitralValve extends CategoryComponent {
                 } else if (selectedIndex == 4 || selectedIndex == 5 ||
                         selectedIndex == 6) {
                     
+                    comboBoxPeriprostheticReflux.setEnabled(false);
+                    comboBoxPeriprostheticReflux.setSelectedIndex(0);
                     comboBoxCalcification.setEnabled(false);
                     comboBoxCalcification.setSelectedIndex(0);
                     comboBoxMobility.setEnabled(false);
@@ -359,11 +427,25 @@ public final class CategoryMitralValve extends CategoryComponent {
                     comboBoxWilkins.setSelectedIndex(0);
                 } else if(selectedIndex == 2) {
                     
+                    comboBoxPeriprostheticReflux.setEnabled(false);
+                    comboBoxPeriprostheticReflux.setSelectedIndex(0);
                     comboBoxCalcification.setEnabled(true);
                     comboBoxMobility.setEnabled(true);
                     comboBoxWilkins.setEnabled(true);
                 } else if (selectedIndex == 7 || selectedIndex == 8) {
                     
+                    comboBoxPeriprostheticReflux.setEnabled(false);
+                    comboBoxPeriprostheticReflux.setSelectedIndex(0);
+                    comboBoxCalcification.setEnabled(false);
+                    comboBoxCalcification.setSelectedIndex(0);
+                    comboBoxMobility.setEnabled(false);
+                    comboBoxMobility.setSelectedIndex(0);
+                    comboBoxWilkins.setEnabled(false);
+                    comboBoxWilkins.setSelectedIndex(0);
+                } else if(selectedIndex == 0) {
+                
+                    comboBoxPeriprostheticReflux.setEnabled(false);
+                    comboBoxPeriprostheticReflux.setSelectedIndex(0);
                     comboBoxCalcification.setEnabled(false);
                     comboBoxCalcification.setSelectedIndex(0);
                     comboBoxMobility.setEnabled(false);
@@ -614,6 +696,43 @@ public final class CategoryMitralValve extends CategoryComponent {
         Report.getReport().updateReportPane();
     }
     
+    private void fillFormPeriprostheticReflux() {
+        
+        JTextField field1 = new JTextField(10);
+        field1.setText(periprostheticReflux);
+
+        Object[] input = new Object[2];
+        input[0] = "Topografia:";
+        input[1] = field1;
+
+        JOptionPane optionPane = new JOptionPane(
+                input,
+                JOptionPane.PLAIN_MESSAGE,
+                JOptionPane.OK_CANCEL_OPTION
+        );
+
+        JDialog dialog = optionPane.createDialog("Defina os parâmetros");
+
+        Timer timer = new Timer(100, (ActionEvent e) -> {
+            field1.requestFocusInWindow();
+        });
+        
+        timer.setRepeats(false);
+        timer.start();
+
+        dialog.setVisible(true);
+        
+        Object selectedValue = optionPane.getValue();
+        
+        if (selectedValue instanceof Integer && (Integer) selectedValue == JOptionPane.OK_OPTION) {
+
+            periprostheticReflux = field1.getText();
+        }   
+        
+        setHashCategoryReport();
+        Report.getReport().updateReportPane();
+    }
+    
     private void fillFormGradient() {
         
         JTextField field1 = new JTextField(10);
@@ -784,8 +903,8 @@ public final class CategoryMitralValve extends CategoryComponent {
         hashCategoryReport.put("Corda rota - Cúspide posterior", "Com " + thickening + ", abertura preservada e eversão sistólica da cúspide posterior que ocasiona refluxo excêntrico e de grau " + reflux + " ao Doppler. Presença de imagem filiforme e móvel aderida à extremidade da cúspide posterior sugestiva de corda tendínea rota. ");
         hashCategoryReport.put("Prótese biológica - Mitral", "Normoposicionada, com " + thickening + " e mobilidade de seus elementos móveis " + mobility + ". Ao Doppler, refluxo " + reflux + ". ");
         hashCategoryReport.put("Prótese mecânica - Mitral", "Normoposicionada, com " + thickening + " e mobilidade de seus elementos móveis " + mobility + ". Ao Doppler, refluxo " + reflux + ". ");
-        hashCategoryReport.put("Tracionamento - Cúspide anterior", "Com " + thickening + ", abertura " + mobility + " e tracionamento sistólico de sua cúspide posterior que ocasiona " + reflux + " refluxo ao Doppler. ");
-        hashCategoryReport.put("Tracionamento - Duas cúspides", "Com " + thickening + ", abertura " + mobility + " e tracionamento sistólico de suas cúspides que ocasiona " + reflux + " refluxo ao Doppler. ");
+        hashCategoryReport.put("Tracionamento - Cúspide anterior", "Com " + thickening + ", abertura " + mobility + " e tracionamento sistólico de sua cúspide posterior que ocasiona refluxo de grau " + reflux + " ao Doppler. ");
+        hashCategoryReport.put("Tracionamento - Duas cúspides", "Com " + thickening + ", abertura " + mobility + " e tracionamento sistólico de suas cúspides que ocasiona refluxo de grau " + reflux + " ao Doppler. ");
         hashCategoryReport.put("Ecotextura normal", "");
         hashCategoryReport.put("Espessamento discreto", "");
         hashCategoryReport.put("Espessamento moderado", "");
@@ -798,6 +917,11 @@ public final class CategoryMitralValve extends CategoryComponent {
         hashCategoryReport.put("Mínimo", "");
         hashCategoryReport.put("Discreta", "");
         hashCategoryReport.put("Moderada", "");
+        hashCategoryReport.put("Protético ausente", "");
+        hashCategoryReport.put("Protético mínimo(funcional)", "");
+        hashCategoryReport.put("Protético discreto", "");
+        hashCategoryReport.put("Protético moderado", "");
+        hashCategoryReport.put("Protético importante", "");
         hashCategoryReport.put("Cúspide anterior", "");
         hashCategoryReport.put("Cúspide posterior", "");
         hashCategoryReport.put("Calcificação discreta do anel mitral", "Calcificação discreta do anel mitral. ");
@@ -817,6 +941,12 @@ public final class CategoryMitralValve extends CategoryComponent {
         hashCategoryReport.put("<html>Orifício - <b>DEFINIR</b></html>", "Orifício efetivo regurgitante estimado em " + orifice + " cm². ");
         hashCategoryReport.put("<html>Escore de Wilkins - <b>DEFINIR</b></html>", "Escore de Wilkins: " + wilkins + " (espessura - " + thickeningWilkins + "; mobilidade - " + mobilityWilkins + "; calcificação - " + calcificationWilkins + "; subvalvar - " + subvalveWilkins +"). ");
         hashCategoryReport.put("<html>Índice Doppler - <b>DEFINIR</b></html>", "Índice Doppler: " + indexDoppler + " (sugestivo de obstrução significativa se < 2,5). ");
+        hashCategoryReport.put("Leak discreto", "Presença de refluxo periprotético (leak) de grau discreto. ");
+        hashCategoryReport.put("Leak moderado", "Presença de refluxo periprotético (leak) de grau moderado. ");
+        hashCategoryReport.put("Leak importante", "Presença de refluxo periprotético (leak) de grau importante. ");
+        hashCategoryReport.put("<html>Leak discreto - <b>DEFINIR</b></html>", "Presença de refluxo periprotético (leak) de grau discreto em topografia " + periprostheticReflux + ". ");
+        hashCategoryReport.put("<html>Leak moderado - <b>DEFINIR</b></html>", "Presença de refluxo periprotético (leak) de grau moderado em topografia " + periprostheticReflux + ". ");
+        hashCategoryReport.put("<html>Leak importante - <b>DEFINIR</b></html>", "Presença de refluxo periprotético (leak) de grau importante em topografia " + periprostheticReflux + ". ");
     }
 
     @Override
@@ -826,10 +956,5 @@ public final class CategoryMitralValve extends CategoryComponent {
         comboBoxThickening.setSelectedIndex(1);
         comboBoxMobility.setSelectedIndex(1);
         comboBoxReflux.setSelectedIndex(1);
-        editButtonGradient.setEnabled(false);
-        editButtonPht.setEnabled(false);
-        editButtonValveArea.setEnabled(false);
-        editButtonOrifice.setEnabled(false);
-        editButtonWilkins.setEnabled(false);
     }
 }

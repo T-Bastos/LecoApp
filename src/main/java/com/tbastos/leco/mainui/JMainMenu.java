@@ -72,12 +72,17 @@ public class JMainMenu extends JMenuBar{
                 reportCategoryText[i] = category.getCategoryText();
             } else {
             
-                reportCategoryText[i] = category.getCategoryText() + " " + category.getCategoryTextArea().getText();
+                reportCategoryText[i] = category.getCategoryText() + category.getCategoryTextArea().getText();
             }
             i++;
         }
         
-        ArrayList<String> categoryConclusionText = iteratorCategory.next().getCategoryTextArray();
+        category = iteratorCategory.next();
+        ArrayList<String> categoryConclusionText = category.getCategoryTextArray();
+        if(!category.getCategoryTextArea().getText().equals("Digite sua nota opcional aqui...") && !category.getCategoryTextArea().getText().equals("")) {
+            
+            categoryConclusionText.add(category.getCategoryTextArea().getText());
+        }
         
         try {
             
@@ -120,7 +125,6 @@ public class JMainMenu extends JMenuBar{
                 category = iterator.next();
                 category.setIndex0ComboBoxes();
                 category.setNormalComboBoxes();
-                category.getCategoryTextArea().setText("");
             }
             
             Report.getReport().updateReportPane();
@@ -145,12 +149,17 @@ public class JMainMenu extends JMenuBar{
                 reportCategoryText[i] = category.getCategoryText();
             } else {
             
-                reportCategoryText[i] = category.getCategoryText() + " " + category.getCategoryTextArea().getText();
+                reportCategoryText[i] = category.getCategoryText() + category.getCategoryTextArea().getText();
             }
             i++;
         }
         
-        ArrayList<String> categoryConclusionText = iteratorCategory.next().getCategoryTextArray();
+        category = iteratorCategory.next();
+        ArrayList<String> categoryConclusionText = category.getCategoryTextArray();
+        if(!category.getCategoryTextArea().getText().equals("Digite sua nota opcional aqui...") && !category.getCategoryTextArea().getText().equals("")) {
+            
+            categoryConclusionText.add(category.getCategoryTextArea().getText());
+        }
         
         JFileChooser fc = new JFileChooser();
         fc.setAcceptAllFileFilterUsed(false);

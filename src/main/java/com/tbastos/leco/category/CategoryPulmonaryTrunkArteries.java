@@ -67,7 +67,6 @@ public final class CategoryPulmonaryTrunkArteries extends CategoryComponent {
         setCategoryListeners();
     }
                  
-    @Override
     protected void setCategoryListeners() {
      
         editButtonPressure.addActionListener((ActionEvent e) -> {
@@ -220,8 +219,6 @@ public final class CategoryPulmonaryTrunkArteries extends CategoryComponent {
     @Override
     public void setNormalComboBoxes() {
         
-        editButtonDiamet.setEnabled(false);
-        editButtonPressure.setEnabled(false);
         comboBoxDiamet.setSelectedIndex(1);
         comboBoxHypertension.setSelectedIndex(1);
     }

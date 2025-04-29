@@ -78,7 +78,6 @@ public final class CategoryMyocardialThickness extends CategoryComponent {
         setCategoryListeners();
     }
     
-    @Override
     protected void setCategoryListeners() {
         
         editButtonMassEsp.addActionListener((ActionEvent e) -> {
@@ -270,8 +269,6 @@ public final class CategoryMyocardialThickness extends CategoryComponent {
     @Override
     public void setNormalComboBoxes() {
         
-        editButtonMassEsp.setEnabled(false);
-        editButtonDisease.setEnabled(false);
         comboBoxSize.setSelectedIndex(1);
     }
 }

@@ -72,6 +72,28 @@ public class Report {
         reportPane.setEditable(false);
         reportPane.setEnabled(false);
         reportPane.setDisabledTextColor(Color.BLACK);
+        reportPane.setDocument(new DefaultStyledDocument());
+        
+        StyledDocument doc = reportPane.getStyledDocument();
+
+        Style styleParagraph = doc.addStyle("Paragraph", null);
+        StyleConstants.setAlignment(styleParagraph, StyleConstants.ALIGN_JUSTIFIED);
+        StyleConstants.setSpaceAbove(styleParagraph, 1);
+        doc.setLogicalStyle(0, styleParagraph);
+
+        Style styleBold12 = doc.addStyle("BoldSize12", styleParagraph);
+        StyleConstants.setBold(styleBold12, true);
+        StyleConstants.setFontFamily(styleBold12, UIManager.getFont("Label.font").getFamily());
+        StyleConstants.setFontSize(styleBold12, 12);
+
+        Style style12 = doc.addStyle("Size12", styleParagraph);
+        StyleConstants.setFontFamily(style12, UIManager.getFont("Label.font").getFamily());
+        StyleConstants.setFontSize(style12, 12);
+
+        Style styleBold18 = doc.addStyle("BoldSize18", styleParagraph);
+        StyleConstants.setFontFamily(styleBold18, UIManager.getFont("Label.font").getFamily());
+        StyleConstants.setBold(styleBold18, true);
+        StyleConstants.setFontSize(styleBold18, 18);
     }
     
     public static Report getReport() {
@@ -98,27 +120,8 @@ public class Report {
         
         try {
             
-            reportPane.setDocument(new DefaultStyledDocument());
+            reportPane.setText("");
             StyledDocument doc = reportPane.getStyledDocument();
-
-            Style styleParagraph = doc.addStyle("Paragraph", null);
-            StyleConstants.setAlignment(styleParagraph, StyleConstants.ALIGN_JUSTIFIED);
-            StyleConstants.setSpaceAbove(styleParagraph, 1);
-            doc.setLogicalStyle(0, styleParagraph);
-
-            Style styleBold12 = doc.addStyle("BoldSize12", styleParagraph);
-            StyleConstants.setBold(styleBold12, true);
-            StyleConstants.setFontFamily(styleBold12, UIManager.getFont("Label.font").getFamily());
-            StyleConstants.setFontSize(styleBold12, 12);
-
-            Style style12 = doc.addStyle("Size12", styleParagraph);
-            StyleConstants.setFontFamily(style12, UIManager.getFont("Label.font").getFamily());
-            StyleConstants.setFontSize(style12, 12);
-
-            Style styleBold18 = doc.addStyle("BoldSize18", styleParagraph);
-            StyleConstants.setFontFamily(styleBold18, UIManager.getFont("Label.font").getFamily());
-            StyleConstants.setBold(styleBold18, true);
-            StyleConstants.setFontSize(styleBold18, 18);
             
             doc.insertString(doc.getLength(), "COMENTÁRIOS:\n", doc.getStyle("BoldSize18"));
             

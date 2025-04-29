@@ -51,7 +51,6 @@ public final class CategoryLeftAtrium extends CategoryComponent {
         setCategoryListeners();
     }
     
-    @Override
     protected void setCategoryListeners() {
         
         editButtonSize.addActionListener((ActionEvent e) -> {
@@ -134,8 +133,7 @@ public final class CategoryLeftAtrium extends CategoryComponent {
     
     @Override
     public void setNormalComboBoxes() {
-        
-        editButtonSize.setEnabled(false);
+
         comboBoxSize.setSelectedIndex(1);
     }
 }

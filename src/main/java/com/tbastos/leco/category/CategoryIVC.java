@@ -55,8 +55,7 @@ public final class CategoryIVC extends CategoryComponent {
         setHashCategoryReport();
         setCategoryListeners();
     }
-    
-    @Override
+
     protected void setCategoryListeners() {
         
         editButtonModel.addActionListener((ActionEvent e) -> {
@@ -149,6 +148,5 @@ public final class CategoryIVC extends CategoryComponent {
     public void setNormalComboBoxes() {
         
         comboBoxModel.setSelectedIndex(1);
-        editButtonModel.setEnabled(false);
     }
 }

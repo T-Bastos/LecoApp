@@ -94,7 +94,6 @@ public final class CategoryRightVentricle extends CategoryComponent {
         setCategoryListeners();
     }
     
-    @Override
     protected void setCategoryListeners() {
         
         editButtonTapse.addActionListener((ActionEvent e) -> {
@@ -421,10 +420,6 @@ public final class CategoryRightVentricle extends CategoryComponent {
     @Override
     public void setNormalComboBoxes() {
         
-        editButtonTapse.setEnabled(false);
-        editButtonS.setEnabled(false);
-        editButtonFac.setEnabled(false);
-        editButtonDiamet.setEnabled(false);
         comboBoxSize.setSelectedIndex(1);
         comboBoxSys.setSelectedIndex(1);
     }

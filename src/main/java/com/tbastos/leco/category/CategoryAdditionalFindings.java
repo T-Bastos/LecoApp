@@ -48,6 +48,7 @@ public final class CategoryAdditionalFindings extends CategoryComponent {
         jLabelSubcategories.add(new JLabelSubcategory("Normal")); 
         comboBoxNormal = new JComboBoxSubcategory(new String[]{"", "Sim"});
         jComboBoxSubcategories.add(comboBoxNormal);
+        setNormalListeners();
         
         jLabelSubcategories.add(new JLabelSubcategory("Trombo intracavitário"));
         comboBoxIntracavitaryThrombus = new JComboBoxSubcategory(new String[]{"", "<html>Presença de imagem hipocogênica - <b>DEFINIR</b></html>"});
@@ -56,6 +57,7 @@ public final class CategoryAdditionalFindings extends CategoryComponent {
         editButtonIntracavitaryThrombus = new JEditButton();
         editButtonIntracavitaryThrombus.setName("IntracavitaryThrombus");
         arrayEditButton.add(editButtonIntracavitaryThrombus);
+        setIntracavitaryThrombusListeners();
         
         jLabelSubcategories.add(new JLabelSubcategory("Vegetação")); 
         comboBoxVegetation = new JComboBoxSubcategory(new String[]{"", "<html>Presença de imagem ecogênica heterogênea - <b>DEFINIR</b></html>"});
@@ -64,33 +66,36 @@ public final class CategoryAdditionalFindings extends CategoryComponent {
         editButtonVegetation = new JEditButton();
         editButtonVegetation.setName("Vegetation");
         arrayEditButton.add(editButtonVegetation);
+        setVegetationListeners();
         
         jLabelSubcategories.add(new JLabelSubcategory("Derrame pleural")); 
         comboBoxEffusion = new JComboBoxSubcategory(new String[]{"", "Derrame pleural"});
         jComboBoxSubcategories.add(comboBoxEffusion);
+        setEffusionListeners();
         
         jLabelSubcategories.add(new JLabelSubcategory("Cateter")); 
         comboBoxCatheter = new JComboBoxSubcategory(new String[]{"", "Cateter livre no átrio direito", "Cateter livre no ventrículo direito", "Cateter livre na veia cava superior"});
         jComboBoxSubcategories.add(comboBoxCatheter);
+        setCatheterListeners();
         
         jLabelSubcategories.add(new JLabelSubcategory("Marcapasso")); 
         comboBoxPacemaker = new JComboBoxSubcategory(new String[]{"", "Eletrodo de marcapasso"});
         jComboBoxSubcategories.add(comboBoxPacemaker);
+        setPacemakerListeners();
         
         jLabelSubcategories.add(new JLabelSubcategory("RAC sign")); 
         comboBoxRac = new JComboBoxSubcategory(new String[]{"", "Presente"});
         jComboBoxSubcategories.add(comboBoxRac);
+        setRacListeners();
         
         JLabelSubcategory notes = new JLabelSubcategory("Notas adicionais");
         notes.setName("Notes");
         jLabelSubcategories.add(notes);
         
         setHashCategoryReport();
-        setCategoryListeners();
     }
     
-    @Override
-    protected void setCategoryListeners() {
+    private void setIntracavitaryThrombusListeners() {
         
         editButtonIntracavitaryThrombus.addActionListener((ActionEvent e) -> {
             
@@ -116,8 +121,11 @@ public final class CategoryAdditionalFindings extends CategoryComponent {
                     fillFormIntracavitaryThrombus();
                 }
             }
-        });
-        
+        });  
+    }
+    
+    private void setVegetationListeners() {
+    
         editButtonVegetation.addActionListener((ActionEvent e) -> {
             
             fillFormVegetation();
@@ -143,7 +151,10 @@ public final class CategoryAdditionalFindings extends CategoryComponent {
                 }
             }
         });
-        
+    }
+    
+    private void setNormalListeners() {
+    
         comboBoxNormal.addItemListener((ItemEvent e) -> {
             
             if(e.getStateChange() == ItemEvent.SELECTED) {
@@ -153,7 +164,10 @@ public final class CategoryAdditionalFindings extends CategoryComponent {
                 Report.getReport().updateReportPane();
             }
         });
-        
+    }
+    
+    private void setEffusionListeners() {
+    
         comboBoxEffusion.addItemListener((ItemEvent e) -> {
             
             if(e.getStateChange() == ItemEvent.SELECTED) {
@@ -163,7 +177,10 @@ public final class CategoryAdditionalFindings extends CategoryComponent {
                 Report.getReport().updateReportPane();
             }
         });
-        
+    }
+    
+    private void setCatheterListeners() {
+    
         comboBoxCatheter.addItemListener((ItemEvent e) -> {
             if(e.getStateChange() == ItemEvent.SELECTED) {
                 
@@ -172,7 +189,10 @@ public final class CategoryAdditionalFindings extends CategoryComponent {
                 Report.getReport().updateReportPane();
             }
         });
-        
+    }
+    
+    private void setPacemakerListeners() {
+    
         comboBoxPacemaker.addItemListener((ItemEvent e) -> {
             
             if(e.getStateChange() == ItemEvent.SELECTED) {
@@ -182,7 +202,10 @@ public final class CategoryAdditionalFindings extends CategoryComponent {
                 Report.getReport().updateReportPane();
             }
         });
-        
+    }
+    
+    private void setRacListeners() {
+    
         comboBoxRac.addItemListener((ItemEvent e) -> {
             
             if(e.getStateChange() == ItemEvent.SELECTED) {
@@ -297,8 +320,6 @@ public final class CategoryAdditionalFindings extends CategoryComponent {
     @Override
     public void setNormalComboBoxes() {
         
-        editButtonIntracavitaryThrombus.setEnabled(false);
-        editButtonVegetation.setEnabled(false);
         comboBoxNormal.setSelectedIndex(1);
     }
 }

@@ -79,7 +79,6 @@ public final class CategoryPericardium extends CategoryComponent {
         setCategoryListeners();
     }
     
-    @Override
     protected void setCategoryListeners() {
     
         editButtonBlade.addActionListener((ActionEvent e) -> {
@@ -245,7 +244,6 @@ public final class CategoryPericardium extends CategoryComponent {
     @Override
     public void setNormalComboBoxes() {
         
-        editButtonBlade.setEnabled(false);
         comboBoxModel.setSelectedIndex(1);
     }
 }

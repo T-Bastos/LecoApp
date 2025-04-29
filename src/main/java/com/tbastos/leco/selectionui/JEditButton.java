@@ -14,8 +14,8 @@ import javax.swing.JButton;
  */
 public class JEditButton extends JButton {
     
-    private final int X_JBUTTON = 24; 
-    private final int Y_JBUTTON = 24; 
+    private final int X_JBUTTON = 20; 
+    private final int Y_JBUTTON = 20; 
     
     public JEditButton() {
         

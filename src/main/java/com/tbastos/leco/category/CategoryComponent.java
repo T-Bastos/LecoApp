@@ -23,7 +23,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.border.TitledBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -112,7 +111,6 @@ public abstract class CategoryComponent {
 
                     setIndex0ComboBoxes();
                     setNormalComboBoxes();   
-                    getCategoryTextArea().setText("");
                 }
             });
         }
@@ -141,7 +139,12 @@ public abstract class CategoryComponent {
                 @Override
                 public void focusGained(FocusEvent e) {
                     if (textArea.getText().equals(placeholder)) {
+                        
                         textArea.setText("");
+                        textArea.setFont(normalFont);
+                        textArea.setForeground(textColor);
+                    } else if (textArea.getText().equals("")) {
+                    
                         textArea.setFont(normalFont);
                         textArea.setForeground(textColor);
                     }
@@ -259,6 +262,5 @@ public abstract class CategoryComponent {
     }
     
     public abstract void setNormalComboBoxes();
-    protected abstract void setCategoryListeners();
     protected abstract void setHashCategoryReport();
 }

@@ -139,7 +139,7 @@ public final class CategoryPulmonaryValve extends CategoryComponent {
                 
                 checkResetButton();
                 if(comboBoxPeriprostheticReflux.getSelectedIndex() == 0 || comboBoxPeriprostheticReflux.getSelectedIndex() == 1
-                        || comboBoxPeriprostheticReflux.getSelectedIndex() == 2) {
+                        || comboBoxPeriprostheticReflux.getSelectedIndex() == 2 || comboBoxPeriprostheticReflux.getSelectedIndex() == 3) {
                     
                     periprostheticReflux = "XXX";
                     editButtonPeriprostheticReflux.setEnabled(false);

@@ -44,21 +44,22 @@ public final class CategoryAtrialSeptum extends CategoryComponent {
         editButtonModel = new JEditButton();
         editButtonModel.setName("Model");
         arrayEditButton.add(editButtonModel);
+        setModelListeners();
         
         jLabelSubcategories.add(new JLabelSubcategory("Hipertrofia lipomatosa")); 
         comboBoxHypertrophy = new JComboBoxSubcategory(new String[]{"", "Infiltração lipomatosa", "Hipertrofia lipomatosa"});
         jComboBoxSubcategories.add(comboBoxHypertrophy);
+        setHypertrophyListeners();
         
         JLabelSubcategory notes = new JLabelSubcategory("Notas adicionais");
         notes.setName("Notes");
         jLabelSubcategories.add(notes);
         
         setHashCategoryReport();
-        setCategoryListeners();
     }
     
-    protected void setCategoryListeners() {
-        
+    private void setModelListeners() {
+    
         editButtonModel.addActionListener((ActionEvent e) -> {
             
             fillFormModel();
@@ -84,7 +85,10 @@ public final class CategoryAtrialSeptum extends CategoryComponent {
                 }
             }
         });
-        
+    }
+    
+    private void setHypertrophyListeners() {
+            
         comboBoxHypertrophy.addItemListener((ItemEvent e) -> {
             
             if(e.getStateChange() == ItemEvent.SELECTED) {
@@ -93,7 +97,7 @@ public final class CategoryAtrialSeptum extends CategoryComponent {
                 setHashCategoryReport();
                 Report.getReport().updateReportPane();
             }
-        });
+        });    
     }
     
     private void fillFormModel() {

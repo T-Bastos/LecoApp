@@ -69,25 +69,30 @@ public final class CategoryAorticValve extends CategoryComponent {
         jLabelSubcategories.add(new JLabelSubcategory("Modelo"));
         comboBoxModel = new JComboBoxSubcategory(new String[]{"", "Valva nativa habitual", "Degenerativa", "Bivalvular - Rafe", "Bivalvular - Purely bicuspid", "Prótese biológica - Aórtica", "Prótese mecânica - Aórtica"});
         jComboBoxSubcategories.add(comboBoxModel);
+        setModelListeners();
         
         jLabelSubcategories.add(new JLabelSubcategory("Espessamento")); 
         comboBoxThickening = new JComboBoxSubcategory(new String[]{"", "Ecotextura normal", "Espessamento discreto", "Espessamento moderado", "Espessamento importante"});
         comboBoxThickening.setEnabled(false);
         jComboBoxSubcategories.add(comboBoxThickening);
+        setThickeningListeners();
         
         jLabelSubcategories.add(new JLabelSubcategory("Calcificação"));
         comboBoxCalcification = new JComboBoxSubcategory(new String[]{"", "Mínima", "Discreta", "Moderada", "Importante"});
         comboBoxCalcification.setEnabled(false);
         jComboBoxSubcategories.add(comboBoxCalcification);
+        setCalcificationListeners();
         
         jLabelSubcategories.add(new JLabelSubcategory("Abertura / Mobilidade prótese")); 
         comboBoxMobility = new JComboBoxSubcategory(new String[]{"", "Preservada", "Reduzida em grau discreto", "Reduzida em grau moderado", "Reduzida em grau importante", "Reduzida em grau não significativo", "Reduzida em grau significativo"});
         comboBoxMobility.setEnabled(false);
         jComboBoxSubcategories.add(comboBoxMobility);
+        setMobilityListeners();
         
         jLabelSubcategories.add(new JLabelSubcategory("Refluxo")); 
         comboBoxReflux = new JComboBoxSubcategory(new String[]{"", "Ausente", "Discreto", "Moderado", "Importante"});
         jComboBoxSubcategories.add(comboBoxReflux);
+        setRefluxListeners();
         
         jLabelSubcategories.add(new JLabelSubcategory("Refluxo periprotético")); 
         comboBoxPeriprostheticReflux = new JComboBoxSubcategory(new String[]{"", "Leak discreto", "Leak moderado", "Leak importante", "<html>Leak discreto - <b>DEFINIR</b></html>", "<html>Leak moderado - <b>DEFINIR</b></html>", "<html>Leak importante - <b>DEFINIR</b></html>"});
@@ -97,6 +102,7 @@ public final class CategoryAorticValve extends CategoryComponent {
         editButtonPeriprostheticReflux = new JEditButton();
         editButtonPeriprostheticReflux.setName("PeriprostheticReflux");
         arrayEditButton.add(editButtonPeriprostheticReflux);
+        setPeriprostheticRefluxListeners();
         
         jLabelSubcategories.add(new JLabelSubcategory("Orifício efetivo regurgitante")); 
         comboBoxOrifice = new JComboBoxSubcategory(new String[]{"", "<html>Orifício - <b>DEFINIR</b></html>"});
@@ -105,6 +111,7 @@ public final class CategoryAorticValve extends CategoryComponent {
         editButtonOrifice = new JEditButton();
         editButtonOrifice.setName("Orifice");
         arrayEditButton.add(editButtonOrifice);
+        setOrificeListeners();
         
         jLabelSubcategories.add(new JLabelSubcategory("Rafe")); 
         comboBoxRaphe = new JComboBoxSubcategory(new String[]{"", "<html>Rafe das Válvulas - <b>DEFINIR</b></html>"});
@@ -114,6 +121,7 @@ public final class CategoryAorticValve extends CategoryComponent {
         editButtonRaphe = new JEditButton();
         editButtonRaphe.setName("Raphe");
         arrayEditButton.add(editButtonRaphe);
+        setRapheListeners();
         
         jLabelSubcategories.add(new JLabelSubcategory("Gradiente máximo")); 
         comboBoxMaxGradient = new JComboBoxSubcategory(new String[]{"", "<html>Gradiente máximo - <b>DEFINIR</b></html>"});
@@ -122,6 +130,7 @@ public final class CategoryAorticValve extends CategoryComponent {
         editButtonMaxGradient = new JEditButton();
         editButtonMaxGradient.setName("MaxGradient");
         arrayEditButton.add(editButtonMaxGradient);
+        setMaxGradientListeners();
         
         jLabelSubcategories.add(new JLabelSubcategory("Gradiente médio")); 
         comboBoxMidGradient = new JComboBoxSubcategory(new String[]{"", "<html>Gradiente médio - <b>DEFINIR</b></html>"});
@@ -130,6 +139,7 @@ public final class CategoryAorticValve extends CategoryComponent {
         editButtonMidGradient = new JEditButton();
         editButtonMidGradient.setName("MidGradient");
         arrayEditButton.add(editButtonMidGradient);
+        setMidGradientListeners();
         
         jLabelSubcategories.add(new JLabelSubcategory("Área valvar")); 
         comboBoxValveArea = new JComboBoxSubcategory(new String[]{"", "<html>Equação de continuidade - <b>DEFINIR</b></html>", "<html>Planimetria - <b>DEFINIR</b><html>"});
@@ -138,6 +148,7 @@ public final class CategoryAorticValve extends CategoryComponent {
         editButtonValveArea = new JEditButton();
         editButtonValveArea.setName("ValveArea");
         arrayEditButton.add(editButtonValveArea);
+        setValveAreaListeners();
         
         jLabelSubcategories.add(new JLabelSubcategory("Índice Doppler")); 
         comboBoxIndexDoppler = new JComboBoxSubcategory(new String[]{"", "<html>Índice Doppler - <b>DEFINIR</b></html>"});
@@ -146,6 +157,7 @@ public final class CategoryAorticValve extends CategoryComponent {
         editButtonIndexDoppler = new JEditButton();
         editButtonIndexDoppler.setName("IndexDoppler");
         arrayEditButton.add(editButtonIndexDoppler);
+        setIndexDopplerListeners();
         
         jLabelSubcategories.add(new JLabelSubcategory("Relação TAC/TE")); 
         comboBoxTacTe = new JComboBoxSubcategory(new String[]{"", "<html>Relação aceleração/tempo - <b>DEFINIR</b></html>"});
@@ -154,17 +166,38 @@ public final class CategoryAorticValve extends CategoryComponent {
         editButtonTacTe = new JEditButton();
         editButtonTacTe.setName("TacTe");
         arrayEditButton.add(editButtonTacTe);
+        setTacTeListeners();
         
         JLabelSubcategory notes = new JLabelSubcategory("Notas adicionais");
         notes.setName("Notes");
         jLabelSubcategories.add(notes);
         
         setHashCategoryReport();  
-        setCategoryListeners();
     }
     
-    protected void setCategoryListeners() {
+    private void setMobilityListeners() {
         
+        comboBoxMobility.addItemListener((ItemEvent e) -> {
+            
+            if(e.getStateChange() == ItemEvent.SELECTED) {
+                
+                checkResetButton();
+                if(comboBoxMobility.getSelectedIndex() != 0) {
+                    
+                    mobility = comboBoxMobility.getSelectedItem().toString().toLowerCase();
+                } else {
+                    
+                    mobility = "XXX";
+                }
+                
+                setHashCategoryReport();
+                Report.getReport().updateReportPane();
+            }
+        });
+    }
+    
+    private void setPeriprostheticRefluxListeners() {
+    
         editButtonPeriprostheticReflux.addActionListener((ActionEvent e) -> {
             
             fillFormPeriprostheticReflux();
@@ -190,7 +223,10 @@ public final class CategoryAorticValve extends CategoryComponent {
                 }
             }
         });
-        
+    }
+    
+    private void setModelListeners() {
+    
         comboBoxModel.addItemListener((ItemEvent e) -> {
             
             if(e.getStateChange() == ItemEvent.SELECTED) {
@@ -298,25 +334,10 @@ public final class CategoryAorticValve extends CategoryComponent {
                 Report.getReport().updateReportPane();
             }
         });
-        
-        comboBoxThickening.addItemListener((ItemEvent e) -> {
-            
-            if(e.getStateChange() == ItemEvent.SELECTED) {
-                
-                checkResetButton();
-                if(comboBoxThickening.getSelectedIndex() != 0) {
-                    
-                    thickening = comboBoxThickening.getSelectedItem().toString().toLowerCase();
-                } else {
-                    
-                    thickening = "XXX";
-                }
-                
-                setHashCategoryReport();
-                Report.getReport().updateReportPane();
-            }
-        });
-        
+    }
+   
+    private void setCalcificationListeners() {
+    
         comboBoxCalcification.addItemListener((ItemEvent e) -> {
             
             if(e.getStateChange() == ItemEvent.SELECTED) {
@@ -334,43 +355,38 @@ public final class CategoryAorticValve extends CategoryComponent {
                 Report.getReport().updateReportPane();
             }
         });
+    }
+    
+    private void setIndexDopplerListeners() {
+    
+        editButtonIndexDoppler.addActionListener((ActionEvent e) -> {
+            
+            fillFormIndexDoppler();
+        });
         
-        comboBoxMobility.addItemListener((ItemEvent e) -> {
+        comboBoxIndexDoppler.addItemListener((ItemEvent e) -> {
             
             if(e.getStateChange() == ItemEvent.SELECTED) {
                 
                 checkResetButton();
-                if(comboBoxMobility.getSelectedIndex() != 0) {
+                indexDoppler = "XXX";
+                
+                if(comboBoxIndexDoppler.getSelectedIndex() == 0) {
                     
-                    mobility = comboBoxMobility.getSelectedItem().toString().toLowerCase();
+                    editButtonIndexDoppler.setEnabled(false);
+                    setHashCategoryReport();
+                    Report.getReport().updateReportPane();
                 } else {
                     
-                    mobility = "XXX";
+                    editButtonIndexDoppler.setEnabled(true);
+                    fillFormIndexDoppler();
                 }
-                
-                setHashCategoryReport();
-                Report.getReport().updateReportPane();
             }
         });
-        
-        comboBoxReflux.addItemListener((ItemEvent e) -> {
-            
-            if(e.getStateChange() == ItemEvent.SELECTED) {
-                
-                checkResetButton();
-                if(comboBoxReflux.getSelectedIndex() != 0) {
-                    
-                    reflux = comboBoxReflux.getSelectedItem().toString().toLowerCase();
-                } else {
-                    
-                    reflux = "XXX";
-                }
-                
-                setHashCategoryReport();
-                Report.getReport().updateReportPane();
-            }
-        });
-        
+    }
+    
+    private void setMaxGradientListeners() {
+    
         editButtonMaxGradient.addActionListener((ActionEvent e) -> {
             
             fillFormMaxGradient();
@@ -394,8 +410,11 @@ public final class CategoryAorticValve extends CategoryComponent {
                     fillFormMaxGradient();
                 }
             }
-        });  
-        
+        });
+    }
+    
+    private void setMidGradientListeners() {
+    
         editButtonMidGradient.addActionListener((ActionEvent e) -> {
             
             fillFormMidGradient();
@@ -419,8 +438,39 @@ public final class CategoryAorticValve extends CategoryComponent {
                     fillFormMidGradient();
                 }
             }
-        });  
+        }); 
+    }
+    
+    private void setOrificeListeners() {
+    
+        editButtonOrifice.addActionListener((ActionEvent e) -> {
+            
+            fillFormOrifice();
+        });
         
+        comboBoxOrifice.addItemListener((ItemEvent e) -> {
+            
+            if(e.getStateChange() == ItemEvent.SELECTED) {
+                
+                checkResetButton();
+                orifice = "XXX";
+                
+                if(comboBoxOrifice.getSelectedIndex() == 0) {
+                    
+                    editButtonOrifice.setEnabled(false);
+                    setHashCategoryReport();
+                    Report.getReport().updateReportPane();
+                } else {
+                    
+                    editButtonOrifice.setEnabled(true);
+                    fillFormOrifice();
+                }
+            }
+        });
+    }
+    
+    private void setRapheListeners() {
+    
         editButtonRaphe.addActionListener((ActionEvent e) -> {
             
             fillFormRaphe();
@@ -446,56 +496,30 @@ public final class CategoryAorticValve extends CategoryComponent {
                 }
             }
         });
-        
-        editButtonValveArea.addActionListener((ActionEvent e) -> {
-            
-            fillFormValveArea();
-        });
-        
-        comboBoxValveArea.addItemListener((ItemEvent e) -> {
+    }
+    
+    private void setRefluxListeners() {
+    
+        comboBoxReflux.addItemListener((ItemEvent e) -> {
             
             if(e.getStateChange() == ItemEvent.SELECTED) {
                 
                 checkResetButton();
-                valveArea = "XXX";
-                
-                if(comboBoxValveArea.getSelectedIndex() == 0) {
+                if(comboBoxReflux.getSelectedIndex() != 0) {
                     
-                    editButtonValveArea.setEnabled(false);
-                    setHashCategoryReport();
-                    Report.getReport().updateReportPane();
+                    reflux = comboBoxReflux.getSelectedItem().toString().toLowerCase();
                 } else {
                     
-                    editButtonValveArea.setEnabled(true);
-                    fillFormValveArea();
+                    reflux = "XXX";
                 }
+                
+                setHashCategoryReport();
+                Report.getReport().updateReportPane();
             }
         });
-        
-        editButtonIndexDoppler.addActionListener((ActionEvent e) -> {
-            
-            fillFormIndexDoppler();
-        });
-        
-        comboBoxIndexDoppler.addItemListener((ItemEvent e) -> {
-            
-            if(e.getStateChange() == ItemEvent.SELECTED) {
-                
-                checkResetButton();
-                indexDoppler = "XXX";
-                
-                if(comboBoxIndexDoppler.getSelectedIndex() == 0) {
-                    
-                    editButtonIndexDoppler.setEnabled(false);
-                    setHashCategoryReport();
-                    Report.getReport().updateReportPane();
-                } else {
-                    
-                    editButtonIndexDoppler.setEnabled(true);
-                    fillFormIndexDoppler();
-                }
-            }
-        });
+    }
+    
+    private void setTacTeListeners() {
         
         editButtonTacTe.addActionListener((ActionEvent e) -> {
             
@@ -521,29 +545,53 @@ public final class CategoryAorticValve extends CategoryComponent {
                 }
             }
         });
-        
-        editButtonOrifice.addActionListener((ActionEvent e) -> {
+    }
+    
+    private void setValveAreaListeners() {
+    
+        editButtonValveArea.addActionListener((ActionEvent e) -> {
             
-            fillFormOrifice();
+            fillFormValveArea();
         });
         
-        comboBoxOrifice.addItemListener((ItemEvent e) -> {
+        comboBoxValveArea.addItemListener((ItemEvent e) -> {
             
             if(e.getStateChange() == ItemEvent.SELECTED) {
                 
                 checkResetButton();
-                orifice = "XXX";
+                valveArea = "XXX";
                 
-                if(comboBoxOrifice.getSelectedIndex() == 0) {
+                if(comboBoxValveArea.getSelectedIndex() == 0) {
                     
-                    editButtonOrifice.setEnabled(false);
+                    editButtonValveArea.setEnabled(false);
                     setHashCategoryReport();
                     Report.getReport().updateReportPane();
                 } else {
                     
-                    editButtonOrifice.setEnabled(true);
-                    fillFormOrifice();
+                    editButtonValveArea.setEnabled(true);
+                    fillFormValveArea();
                 }
+            }
+        });
+    }
+    
+    private void setThickeningListeners() {
+        
+        comboBoxThickening.addItemListener((ItemEvent e) -> {
+            
+            if(e.getStateChange() == ItemEvent.SELECTED) {
+                
+                checkResetButton();
+                if(comboBoxThickening.getSelectedIndex() != 0) {
+                    
+                    thickening = comboBoxThickening.getSelectedItem().toString().toLowerCase();
+                } else {
+                    
+                    thickening = "XXX";
+                }
+                
+                setHashCategoryReport();
+                Report.getReport().updateReportPane();
             }
         });
     }

@@ -40,6 +40,7 @@ public abstract class CategoryComponent {
     protected JResetButton resetButton = null;
     protected JNormalButton normalButton = null;
     protected JTextArea textArea = null;
+    protected JScrollPane jScrollTextArea = null;
     
     public ArrayList<JLabelSubcategory> getJLabelSubcategories() {
         
@@ -118,6 +119,16 @@ public abstract class CategoryComponent {
         return this.normalButton; 
     }
     
+    public JScrollPane getCategoryTextAreaScrollPane() {
+        
+        if(this.jScrollTextArea == null) {
+            
+            getCategoryTextArea();
+        }
+        
+        return jScrollTextArea;
+    }
+    
     public JTextArea getCategoryTextArea() {
         
         if(this.textArea == null) {
@@ -173,9 +184,9 @@ public abstract class CategoryComponent {
                 }
             });
             
-            JScrollPane scroll = new JScrollPane(textArea);
-            scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-            scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+            jScrollTextArea = new JScrollPane(textArea);
+            jScrollTextArea.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+            jScrollTextArea.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         }
         
         return textArea;

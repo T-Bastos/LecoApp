@@ -53,7 +53,7 @@ public class JPanelSelection extends JPanel{
         }
         
         add(new JLabel());
-        add(category.getCategoryTextArea().getParent(), "h 60!, growx");
+        add(category.getCategoryTextAreaScrollPane(), "h 60!, growx");
         add(new JLabel());
     }
 }
